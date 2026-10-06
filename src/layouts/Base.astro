@@ -6,7 +6,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
 import defaultOg from '../assets/projects/burgundy-residence/dining.jpg';
-import bodoniUrl from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2?url';
+import serifUrl from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
 import jostUrl from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
 
 interface Props {
@@ -60,7 +60,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <link rel="preload" href={bodoniUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifUrl} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={jostUrl} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />

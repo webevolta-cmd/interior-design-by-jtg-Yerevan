@@ -243,7 +243,7 @@ const origin = Astro.site!;
 <style>
   /* Philosophy */
   .philo__label { grid-column: 1 / span 3; padding-top: 1rem; }
-  .philo__quote { grid-column: 4 / span 9; font-size: clamp(1.9rem, 1.1rem + 3vw, 4.4rem); line-height: 1.08; letter-spacing: -0.02em; }
+  .philo__quote { grid-column: 4 / span 9; font-size: clamp(1.9rem, 1.1rem + 3vw, 4.4rem); line-height: 1.08; letter-spacing: -0.01em; }
   .philo__quote em { color: var(--wine); }
   .philo__cite { margin-top: 1.5rem; font-family: var(--font-sans); font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
   .philo__text { grid-column: 7 / span 6; margin-top: clamp(40px, 5vw, 72px); }
@@ -330,7 +330,7 @@ const origin = Astro.site!;
   .request__next { display: grid; gap: 0.8rem; padding-block: 1.25rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: var(--fs-sm); }
   .request__next li { display: flex; gap: 0.8rem; }
   .request__direct { display: grid; gap: 0.3rem; }
-  .request__phone { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.2; }
+  .request__phone { font-weight: 420; font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.2; }
   .footer-like { font-size: var(--fs-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }
   .request__form { grid-column: 6 / -1; }
   @media (max-width: 1000px) {

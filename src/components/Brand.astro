@@ -24,15 +24,16 @@ const { class: className, compact = false } = Astro.props;
     border-radius: 50%;
     font-family: var(--font-serif);
     font-size: 15px;
-    letter-spacing: -0.02em;
-    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.04;
     padding-inline: 8px;
     transition: transform 0.8s var(--ease-expo);
   }
   .brand__g { color: var(--brand-g, var(--wine)); font-style: italic; }
   .brand:hover .brand__mark { transform: rotate(-12deg); }
   .brand__text { display: grid; line-height: 1.15; }
-  .brand__line { font-family: var(--font-serif); font-size: 1.05rem; letter-spacing: 0.01em; }
+  .brand__line { font-family: var(--font-serif); font-weight: 460; font-size: 1.05rem; letter-spacing: 0.01em; }
   .brand__line--sub { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.75; margin-top: 3px; }
   @media (max-width: 420px) { .brand__line--sub { display: none; } }
   .brand--compact .brand__text { display: none; }

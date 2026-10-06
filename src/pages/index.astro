@@ -372,7 +372,7 @@ const origin = Astro.site!;
     padding-bottom: clamp(28px, 4vh, 56px);
   }
   .hero__eyebrow { color: rgb(239 232 222 / 0.82); }
-  .hero__title { margin-top: 1.5rem; max-width: 12ch; color: #f6efe6; text-shadow: 0 2px 40px rgb(0 0 0 / 0.18); }
+  .hero__title { margin-top: 1.5rem; color: #f6efe6; text-shadow: 0 2px 36px rgb(15 12 11 / 0.38); }
   .hero__title em { color: #e6c19c; }
   .hero__lower {
     display: grid;
@@ -381,7 +381,7 @@ const origin = Astro.site!;
     gap: 2rem 4rem;
     margin-top: clamp(1.75rem, 4vh, 3rem);
   }
-  .hero__lead { max-width: 46ch; font-size: var(--fs-lead); line-height: 1.5; color: rgb(246 239 230 / 0.92); font-weight: 350; }
+  .hero__lead { max-width: 46ch; font-size: var(--fs-lead); line-height: 1.5; color: rgb(246 239 230 / 0.94); font-weight: 380; text-shadow: 0 1px 20px rgb(15 12 11 / 0.3); }
   .hero__ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   .hero__ctas .btn--ghost { --btn-fg: #f6efe6; border-color: rgb(246 239 230 / 0.45); }
   .hero__ctas .btn--ghost:hover { color: #f6efe6; border-color: var(--wine); }
@@ -401,7 +401,7 @@ const origin = Astro.site!;
   .hero__captions { position: relative; min-height: 2.6em; flex: 1; }
   .hero__caption { position: absolute; inset: 0 auto auto 0; display: grid; gap: 0.2rem; opacity: 0; transform: translateY(8px); transition: opacity 0.6s var(--ease-out), transform 0.8s var(--ease-expo); pointer-events: none; }
   .hero__caption.is-active { opacity: 1; transform: none; pointer-events: auto; transition-delay: 0.45s; }
-  .hero__caption-title { font-family: var(--font-serif); font-size: 0.95rem; letter-spacing: 0.02em; text-transform: none; color: #f6efe6; }
+  .hero__caption-title { font-family: var(--font-serif); font-weight: 460; font-size: 0.95rem; letter-spacing: 0.02em; text-transform: none; color: #f6efe6; }
   .hero__caption-meta { opacity: 0.75; }
   .hero__controls { display: flex; align-items: center; gap: 1.25rem; }
   .hero__dots { display: flex; gap: 6px; }
@@ -425,18 +425,17 @@ const origin = Astro.site!;
     .hero__dots { display: none; }
     .hero__ctas .btn { flex: 1 1 100%; }
     .hero__caption-meta { display: none; }
-    .hero__title { max-width: 10ch; }
   }
 
   /* ---------- INTRO ---------- */
   .intro__label { grid-column: 1 / span 3; padding-top: 0.9rem; }
   .intro__body { grid-column: 4 / -1; }
-  .intro__statement { font-size: clamp(1.75rem, 1.1rem + 2.5vw, 3.9rem); line-height: 1.12; letter-spacing: -0.018em; text-wrap: balance; }
+  .intro__statement { font-size: clamp(1.75rem, 1.1rem + 2.5vw, 3.9rem); line-height: 1.12; letter-spacing: -0.009em; text-wrap: balance; }
   .intro__statement em { color: var(--wine); }
   .intro__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); margin-top: clamp(40px, 5vw, 80px); }
   .intro__facts div { border-top: 1px solid var(--line-strong); padding-top: 1rem; }
   .intro__facts dt { font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-  .intro__facts dd { margin-top: 0.4rem; font-family: var(--font-serif); font-size: clamp(1.1rem, 1rem + 0.4vw, 1.4rem); line-height: 1.3; }
+  .intro__facts dd { margin-top: 0.4rem; font-family: var(--font-serif); font-weight: 440; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.4rem); line-height: 1.3; }
   @media (max-width: 900px) {
     .intro__label, .intro__body { grid-column: 1 / -1; }
     .intro__label { margin-bottom: 1.5rem; }
@@ -454,7 +453,7 @@ const origin = Astro.site!;
   .division:hover .division__media :global(img) { filter: brightness(0.62); }
   .division__body { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(24px, 4vw, 64px); display: grid; gap: 1rem; }
   .division__num { font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
-  .division__title { font-size: clamp(2.6rem, 1.6rem + 4vw, 6.25rem); line-height: 0.95; letter-spacing: -0.03em; }
+  .division__title { font-size: clamp(2.6rem, 1.6rem + 4vw, 6.25rem); line-height: 1.02; letter-spacing: -0.015em; }
   .division__title em { color: #e6c19c; }
   .division__text { max-width: 44ch; color: rgb(246 239 230 / 0.86); font-size: var(--fs-base); }
   .division .link { justify-self: start; margin-top: 0.5rem; }
@@ -505,7 +504,7 @@ const origin = Astro.site!;
   .ba-panel { animation: panel-in 0.8s var(--ease-expo); }
   @keyframes panel-in { from { opacity: 0; transform: translateY(10px); } }
   .ba-panel__meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.25rem; }
-  .ba-panel__project { font-size: clamp(1.2rem, 1rem + 0.6vw, 1.6rem); }
+  .ba-panel__project { font-weight: 430; font-size: clamp(1.2rem, 1rem + 0.6vw, 1.6rem); }
 
   /* ---------- SCHOOL PREVIEW ---------- */
   .sp__intro { grid-column: 1 / span 6; display: grid; gap: 1.9rem; align-content: start; justify-items: start; }
@@ -532,7 +531,7 @@ const origin = Astro.site!;
   .recog__list { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gutter); }
   .recog__list li { border-top: 1px solid var(--line-strong); padding-top: 1.1rem; display: grid; gap: 0.5rem; }
   .recog__k { font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-  .recog__v { font-size: clamp(1.1rem, 1rem + 0.35vw, 1.35rem); line-height: 1.3; }
+  .recog__v { font-weight: 440; font-size: clamp(1.1rem, 1rem + 0.35vw, 1.35rem); line-height: 1.3; }
   @media (max-width: 1000px) { .recog__list { grid-template-columns: 1fr 1fr; row-gap: 2rem; } }
   @media (max-width: 560px) { .recog__list { grid-template-columns: 1fr; } }
 
@@ -546,7 +545,7 @@ const origin = Astro.site!;
   .final__panel:hover .final__media :global(img) { transform: scale(1.04); filter: brightness(0.45); }
   .final__body { position: absolute; inset: auto 0 0 0; padding: clamp(24px, 4vw, 64px); display: grid; gap: 1.25rem; justify-items: start; }
   .final__body .eyebrow { color: rgb(239 232 222 / 0.8); }
-  .final__title { font-size: clamp(2.2rem, 1.4rem + 3vw, 4.8rem); line-height: 0.98; letter-spacing: -0.025em; max-width: 13ch; }
+  .final__title { font-size: clamp(2.2rem, 1.4rem + 3vw, 4.8rem); line-height: 1.03; letter-spacing: -0.013em; max-width: 13ch; }
   .final__title em { color: #e6c19c; }
   @media (max-width: 860px) {
     .final { grid-template-columns: 1fr; }

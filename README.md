@@ -14,7 +14,7 @@ Website for **Jemma Ter-Grigoryan**, her interior design studio and her interior
 | Framework | [Astro 7](https://astro.build) — static output, one HTML file per page |
 | Images | `astro:assets` + sharp — responsive WebP (JPEG fallback) generated at build time |
 | Motion | [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling + a small custom rAF scroll engine, IntersectionObserver reveals, CSS view transitions |
-| Fonts | Bodoni Moda + Jost, self-hosted via Fontsource (no external requests) |
+| Fonts | Fraunces (display serif) + Jost (sans), self-hosted via Fontsource (no external requests) |
 | Forms | [Netlify Forms](https://docs.netlify.com/forms/setup/) with AJAX submission, validation, honeypot |
 | Hosting | Netlify (configured in `netlify.toml`) |
 
