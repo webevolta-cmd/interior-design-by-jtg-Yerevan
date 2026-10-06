@@ -38,7 +38,7 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const og = await getImage({ src: ogImage, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 });
 const ogUrl = new URL(og.src, Astro.site).href;
-const fullTitle = title.includes('JTG') ? title : `${title} — Interior Design by JTG`;
+const fullTitle = title.includes('JTG') ? title : `${title} — Interior Design by JTG`;
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 ---
 

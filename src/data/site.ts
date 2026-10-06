@@ -1,4 +1,4 @@
-// Verified business details — see docs/content-sources.md for the source of every value.
+// Verified business details — see docs/content-sources.md for the source of every value.
 
 export const site = {
   name: 'Interior Design Studio & School by JTG',
@@ -10,7 +10,7 @@ export const site = {
   city: 'Yerevan',
   country: 'Armenia',
   description:
-    'Interior design studio and interior design school in Yerevan, founded in 2022 by designer Jemma Ter-Grigoryan. Interior, exterior and landscape design — and practical design education.',
+    'Interior design studio and interior design school in Yerevan, founded in 2022 by designer Jemma Ter-Grigoryan. Interior, exterior and landscape design — and practical design education.',
   phone: '+374 98 722727',
   phoneHref: 'tel:+37498722727',
   email: 'jemmatergrigoryan@gmail.com',

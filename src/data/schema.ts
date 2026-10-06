@@ -51,7 +51,7 @@ export function schoolSchema(origin: URL | string) {
     '@id': id.school,
     name: site.schoolName,
     description:
-      'Interior design school in Yerevan teaching 3ds Max, Corona Renderer, Photoshop and ArchiCAD / Revit — in person and online, in Armenian and English.',
+      'Interior design school in Yerevan teaching 3ds Max, Corona Renderer, Photoshop and ArchiCAD / Revit — in person and online, in Armenian and English.',
     url: new URL('/design-school/', origin).href,
     telephone: '+37498722727',
     email: site.email,

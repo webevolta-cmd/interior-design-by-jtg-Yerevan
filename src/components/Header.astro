@@ -82,6 +82,8 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     border-bottom: 1px solid transparent;
   }
   .site-header[data-theme='overlay'] { color: var(--on-night); --brand-g: #e0b48f; }
+  .site-header[data-theme='overlay']:not(.is-scrolled):not(.menu-open) :global(.brand__text) { text-shadow: 0 1px 12px rgb(15 12 11 / 0.5); }
+  .site-header[data-theme='overlay']:not(.is-scrolled):not(.menu-open) :global(.brand__line--sub) { opacity: 0.92; }
   .site-header.is-scrolled,
   .site-header[data-theme='solid'] {
     background: rgb(244 239 232 / 0.94);

@@ -44,7 +44,7 @@ const schema = [
     '@type': 'CreativeWork',
     name: p.title,
     description: p.summary,
-    genre: `${p.category} — ${p.type}`,
+    genre: `${p.category} — ${p.type}`,
     dateCreated: p.published,
     creator: { '@id': ids(origin).studio },
     url: new URL(`/projects/${p.slug}/`, origin).href,
@@ -55,7 +55,7 @@ const shapes = ['g-wide', 'g-tall', 'g-tall', 'g-wide', 'g-half', 'g-half'];
 ---
 
 <Base
-  title={`${p.title} — ${p.type}`}
+  title={`${p.title} — ${p.type}`}
   description={`${p.summary} ${p.category} project by Interior Design by JTG, Yerevan (${p.publishedLabel}).`}
   ogImage={p.cover.src}
   ogImageAlt={p.cover.alt}
@@ -160,7 +160,7 @@ const shapes = ['g-wide', 'g-tall', 'g-tall', 'g-wide', 'g-half', 'g-half'];
     </div>
   </a>
 
-  <dialog class="lightbox" data-lightbox-dialog aria-label={`${p.title} — image viewer`}>
+  <dialog class="lightbox" data-lightbox-dialog aria-label={`${p.title} — image viewer`}>
     <div class="lightbox__inner">
       <img data-lightbox-img alt="" />
       <div class="lightbox__bar">
@@ -182,7 +182,7 @@ const shapes = ['g-wide', 'g-tall', 'g-tall', 'g-wide', 'g-half', 'g-half'];
   .pr-hero__title { margin-top: 1rem; max-width: 16ch; color: #f6efe6; }
 
   .pr-intro__lead { grid-column: 1 / span 7; }
-  .pr-intro__summary { font-size: clamp(1.6rem, 1.1rem + 1.9vw, 3rem); line-height: 1.15; letter-spacing: -0.007em; }
+  .pr-intro__summary { font-size: clamp(1.6rem, 1.1rem + 1.9vw, 3rem); line-height: 1.15; letter-spacing: -0.007em;  text-wrap: pretty; }
   .pr-intro__meta { grid-column: 9 / -1; grid-row: 1 / span 2; align-self: start; }
   .pr-intro__approach { grid-column: 1 / span 7; margin-top: clamp(40px, 5vw, 72px); }
   .pr-sub { margin-bottom: 1.25rem; }
@@ -219,7 +219,7 @@ const shapes = ['g-wide', 'g-tall', 'g-tall', 'g-wide', 'g-half', 'g-half'];
   }
 
   .pr-quote__text { max-width: 26ch; margin-inline: auto; text-align: center; font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3.6rem); line-height: 1.12; letter-spacing: -0.009em; font-style: italic; color: var(--wine); }
-  .pr-quote__note { margin-top: 1.5rem; font-family: var(--font-sans); font-style: normal; font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .pr-quote__note { margin-top: 1.5rem; font-family: var(--font-sans); font-style: normal; font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);  line-height: 1.6; text-wrap: balance; }
 
   .pr-cta__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; }
   .pr-cta__inner > div { display: grid; gap: 1rem; }

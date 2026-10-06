@@ -132,15 +132,15 @@ export const projects: Project[] = [
     location: 'Kentron, Yerevan',
     spaces: ['Entrance hall', 'Dining room', 'Kitchen & breakfast table'],
     summary:
-      'A neoclassical apartment in a deep, noble burgundy — used with restraint and balanced by natural stone, dark wood, cream tones and gold detailing.',
+      'A neoclassical apartment in a deep, noble burgundy — used with restraint and balanced by natural stone, dark wood, cream tones and gold detailing.',
     approach: [
       'Burgundy was chosen as one of the defining colours of the year, but applied in measured doses so that it reads as depth and warmth rather than drama. Around it, the palette stays calm: natural stone, dark timber, milky creams and fine gold accents.',
       'The entrance hall sets the tone in a Modern Classic / Contemporary Luxury register: backlit stone panels, relief surfaces and a mirror give the narrow space depth, while a crystal chandelier completes its composition.',
-      'The neoclassical language — mouldings, inlaid floor borders, symmetry — is treated as a timeless combination of classical elegance and modern comfort, and continues through the dining room into a kitchen planned around the client’s wishes and daily routine.',
+      'The neoclassical language — mouldings, inlaid floor borders, symmetry — is treated as a timeless combination of classical elegance and modern comfort, and continues through the dining room into a kitchen planned around the client’s wishes and daily routine.',
     ],
     palette: ['Burgundy lacquer', 'Natural stone', 'Dark timber', 'Cream upholstery', 'Gold & brass metal', 'Crystal lighting'],
     quote: {
-      text: 'Neoclassical style never grows old — it is an eternal combination of classic elegance and modern comfort.',
+      text: 'Neoclassical style never grows old — it is an eternal combination of classic elegance and modern comfort.',
       note: 'From the studio’s project notes, August 2026 (translated from Armenian)',
     },
     cover: { src: burgDining, alt: 'Neoclassical dining room with burgundy wall cabinetry, backlit marble panel, crystal chandelier and a round table for ten' },
@@ -148,7 +148,7 @@ export const projects: Project[] = [
       { src: burgHall, alt: 'Entrance hall with backlit stone panels, burgundy frame, round mirror, crystal chandelier and inlaid marble floor', caption: 'Entrance hall' },
       { src: burgKitchen, alt: 'Kitchen with burgundy upper cabinets, marble splashback, built-in ovens and a round breakfast table', caption: 'Kitchen' },
       { src: burgKitchenTable, alt: 'Round pedestal table in dark wood and brass with cream upholstered chairs', caption: 'Breakfast table' },
-      { src: burgDiningAlt, alt: 'Alternative dining room lighting option with a linear crystal chandelier', caption: 'Dining room — lighting variant' },
+      { src: burgDiningAlt, alt: 'Alternative dining room lighting option with a linear crystal chandelier', caption: 'Dining room — lighting variant' },
     ],
     transformations: [
       {
@@ -181,7 +181,7 @@ export const projects: Project[] = [
       'Two apartments joined into one home: the kitchen wall comes down and the kitchen opens to the living room, resolved in dark timber, black-framed glazing and integrated appliances.',
     approach: [
       'The brief started with the plan. Two neighbouring apartments were combined, the wall enclosing the kitchen was removed, and the kitchen became part of the living space.',
-      'The studio developed several design options for the client to compare — dark wood-grain joinery with integrated tall appliances, a glazed partition to the living area, and a calm stone-effect floor that runs through both spaces.',
+      'The studio developed several design options for the client to compare — dark wood-grain joinery with integrated tall appliances, a glazed partition to the living area, and a calm stone-effect floor that runs through both spaces.',
     ],
     palette: ['Dark wood-grain joinery', 'Integrated appliances', 'Black-framed glazing', 'Light stone-effect floor'],
     cover: { src: kitA, alt: 'Dark timber kitchen with integrated ovens, a black refrigerator wall and a glazed partition' },
@@ -211,7 +211,7 @@ export const projects: Project[] = [
     publishedLabel: 'August 2026',
     spaces: ['Bathroom'],
     summary:
-      'A luxurious study in dark tones: Italian large-format tiles with a natural-stone texture, warm wood and bronze — balanced by a light floor and white sanitaryware.',
+      'A luxurious study in dark tones: Italian large-format tiles with a natural-stone texture, warm wood and bronze — balanced by a light floor and white sanitaryware.',
     approach: [
       'Large-format Italian tiles with veined natural-stone texture wrap the room in a single dark surface. Warm timber shelving and bronze details bring warmth back in.',
       'A light floor and white sanitaryware keep the dark palette from feeling heavy, producing a bathroom that reads as both luxurious and contemporary.',
@@ -275,7 +275,7 @@ export const projects: Project[] = [
     summary:
       'A raw concrete shell with a panoramic window facing Mount Ararat, reimagined as a bathing and dressing suite of warm stone, concealed light and a sculptural glass bath.',
     approach: [
-      'Everything is oriented to the window. The bath sits in front of the glass so that the mountain becomes part of the room, and the surrounding surfaces are kept quiet — warm stone, slim joinery, light hidden in coves and niches.',
+      'Everything is oriented to the window. The bath sits in front of the glass so that the mountain becomes part of the room, and the surrounding surfaces are kept quiet — warm stone, slim joinery, light hidden in coves and niches.',
       'A walk-in dressing area continues the same language, so that the suite reads as one calm, luxurious volume.',
     ],
     palette: ['Warm natural stone', 'Concealed linear lighting', 'Glass', 'Timber joinery'],
@@ -304,7 +304,7 @@ export const projects: Project[] = [
     publishedLabel: 'June 2026',
     spaces: ['Facade', 'Pool & terraces', 'Planting', 'Kitchen-living'],
     summary:
-      'A detached house with pool and green zone — arched white facades, natural stone paving and layered evening light, designed as a place to rest.',
+      'A detached house with pool and green zone — arched white facades, natural stone paving and layered evening light, designed as a place to rest.',
     approach: [
       'The exterior was conceived as one composition with the interior: the same colour combinations, natural stones and materials run from inside to the terraces and the pool.',
       'Arched openings, soft white render and Mediterranean planting set a relaxed rhythm, while lighting along the paths, walls and pool edge turns the garden into an evening space.',
@@ -355,7 +355,7 @@ export const projects: Project[] = [
     summary:
       'A private garden planned from the site plan up: pool, stone fireplace lounge, pergola and lawn arranged into distinct outdoor rooms.',
     approach: [
-      'The project began as a plan — the studio’s site drawing places the pool, sun deck, fire lounge, pergola and play lawn so that each zone has its own character and the garden still reads as one.',
+      'The project began as a plan — the studio’s site drawing places the pool, sun deck, fire lounge, pergola and play lawn so that each zone has its own character and the garden still reads as one.',
       'A stone fireplace anchors the lounge, paving in warm tones frames the water, and dense planting gives the edges privacy and depth.',
     ],
     palette: ['Warm stone paving', 'Stacked-stone fireplace', 'Timber pergola', 'Layered planting'],
@@ -450,7 +450,7 @@ export const projects: Project[] = [
     publishedLabel: 'January 2026',
     spaces: ['Classroom'],
     summary:
-      'A plain white room transformed into a bright, playful classroom — designed around the chairs the client had already bought.',
+      'A plain white room transformed into a bright, playful classroom — designed around the chairs the client had already bought.',
     approach: [
       'The brief came with a constraint: the chairs were already purchased. The design takes them as its starting point, building a colourful graphic wall, a feature mural and clear zones for lessons around them.',
     ],
@@ -496,7 +496,7 @@ export const projects: Project[] = [
         afterAlt: 'The bedroom in the design visualisation with panelled walls and brass chandelier',
       },
       {
-        label: 'Bedroom — second view',
+        label: 'Bedroom — second view',
         before: neoBeforeB,
         after: neoBedC,
         beforeAlt: 'Second view of the bedroom before the design with exposed services',
@@ -532,7 +532,7 @@ export const projects: Project[] = [
         afterAlt: 'The corridor in the design visualisation with geometric floor and linear lights',
       },
       {
-        label: 'Corridor — variant',
+        label: 'Corridor — variant',
         before: corBeforeB,
         after: corB,
         beforeAlt: 'Corridor before the design, second photograph',

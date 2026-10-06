@@ -5,12 +5,12 @@ export const software = [
   {
     name: '3ds Max',
     role: '3D modelling',
-    text: 'Modelling rooms, furniture and soft furnishings — from Edit Poly fundamentals to detailed pieces such as curtains, cushions and design-classic chairs.',
+    text: 'Modelling rooms, furniture and soft furnishings — from Edit Poly fundamentals to detailed pieces such as curtains, cushions and design-classic chairs.',
   },
   {
     name: 'Corona Renderer',
     role: 'Visualisation',
-    text: 'Materials, light and camera for photorealistic interior and exterior visualisations — the same way the studio presents its own projects.',
+    text: 'Materials, light and camera for photorealistic interior and exterior visualisations — the same way the studio presents its own projects.',
   },
   {
     name: 'Photoshop',
@@ -18,9 +18,9 @@ export const software = [
     text: 'Finishing visualisations and presentation boards: colour matching, texture changes and perspective correction.',
   },
   {
-    name: 'ArchiCAD / Revit',
+    name: 'ArchiCAD\u00a0/ Revit',
     role: 'Drawings & documentation',
-    text: 'Plans, sections and working drawings — including profile management in ArchiCAD — so a design can actually be built.',
+    text: 'Plans, sections and working drawings — including profile management in ArchiCAD — so a design can actually be built.',
   },
 ] as const;
 
@@ -31,7 +31,7 @@ export const curriculum = [
   { title: 'Materials, light & rendering', text: 'Corona materials, interior and exterior lighting, and presenting several design options.' },
   { title: 'Post-production', text: 'Photoshop techniques for polished, convincing visualisations.' },
   { title: 'Working drawings', text: 'ArchiCAD / Revit documentation for contractors and clients.' },
-  { title: 'Showrooms & suppliers', text: 'Open lessons in partner showrooms — tiles, lighting, doors — to learn real materials and products.' },
+  { title: 'Showrooms & suppliers', text: 'Open lessons in partner showrooms — tiles, lighting, doors — to learn real materials and products.' },
   { title: 'Portfolio', text: 'Students finish the course with their own portfolio of projects and a certificate.' },
 ] as const;
 
@@ -42,7 +42,7 @@ export const differentiators = [
   },
   {
     title: 'Small groups, personal attention',
-    text: 'Students consistently describe small groups, an individual approach and lots of practice — progress you can see week by week.',
+    text: 'Students consistently describe small groups, an individual approach and lots of practice — progress you can see week by week.',
   },
   {
     title: 'Practice beyond the classroom',
@@ -50,7 +50,7 @@ export const differentiators = [
   },
   {
     title: 'International design tours',
-    text: 'Study trips with the founder to design fairs, showrooms and factories abroad — including Dubai INDEX 2024, Qatar in 2025 and Salone del Mobile, Milan, in 2026.',
+    text: 'Study trips with the founder to design fairs, showrooms and factories abroad — including Dubai INDEX 2024, Qatar in 2025 and Salone del Mobile, Milan, in 2026.',
   },
   {
     title: 'Online or in person',
@@ -58,12 +58,12 @@ export const differentiators = [
   },
   {
     title: 'Portfolio, certificate, career',
-    text: 'Students graduate with a portfolio and certificate — and several graduates already work as designers.',
+    text: 'Students graduate with a portfolio and certificate — and several graduates already work as designers.',
   },
 ] as const;
 
 export const enrolmentSteps = [
-  { title: 'Send an enquiry', text: 'Tell the school about your experience, goals and preferred format using the form below — or call.' },
+  { title: 'Send an enquiry', text: 'Tell the school about your experience, goals and preferred format using the form below — or call.' },
   { title: 'Talk it through', text: 'The school contacts you to discuss the programme, format, schedule and tuition for the next group.' },
   { title: 'Join a group', text: 'Choose in-person or online study and reserve your place in an upcoming group.' },
 ] as const;

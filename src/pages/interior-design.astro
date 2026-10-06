@@ -27,20 +27,20 @@ import stepBuild from '../assets/projects/burgundy-residence/dining.jpg';
 import founderImg from '../assets/people/founder-event.jpg';
 
 const services = [
-  { title: 'Residential interiors', text: 'Apartments and houses — living rooms, kitchens, bedrooms, bathrooms, children’s rooms, wardrobes and entrances — planned around the way you live.', tags: ['Apartments', 'Houses', 'Single rooms'], img: svcResidential, alt: 'Burgundy and cream kitchen with marble splashback and round table' },
-  { title: 'Commercial interiors', text: 'Cafés and pâtisseries, offices, learning centres and other places where people meet, work and buy — designed to be functional and memorable.', tags: ['Hospitality', 'Offices', 'Education'], img: svcCommercial, alt: 'Pâtisserie seating area with blush stools beside a timber counter' },
+  { title: 'Residential interiors', text: 'Apartments and houses — living rooms, kitchens, bedrooms, bathrooms, children’s rooms, wardrobes and entrances — planned around the way you live.', tags: ['Apartments', 'Houses', 'Single rooms'], img: svcResidential, alt: 'Burgundy and cream kitchen with marble splashback and round table' },
+  { title: 'Commercial interiors', text: 'Cafés and pâtisseries, offices, learning centres and other places where people meet, work and buy — designed to be functional and memorable.', tags: ['Hospitality', 'Offices', 'Education'], img: svcCommercial, alt: 'Pâtisserie seating area with blush stools beside a timber counter' },
   { title: 'Exterior design', text: 'Facades and house exteriors composed together with the interior, using the same colours, natural stones and materials inside and out.', tags: ['Facades', 'Lighting'], img: svcExterior, alt: 'Arched white villa facade lit at dusk' },
-  { title: 'Landscape design', text: 'Gardens, pools, terraces, outdoor kitchens and fire lounges — from the site plan to the evening atmosphere.', tags: ['Gardens', 'Pools', 'Outdoor kitchens'], img: svcLandscape, alt: 'Stone fireplace lounge beside a garden pool' },
-  { title: 'Photorealistic visualisation', text: 'Every space is presented in detailed visualisations before anything is built — often in several options, so decisions are made with confidence.', tags: ['3D', 'Design options'], img: svcViz, alt: 'Evening visualisation of a contemporary apartment with bar and pendants' },
+  { title: 'Landscape design', text: 'Gardens, pools, terraces, outdoor kitchens and fire lounges — from the site plan to the evening atmosphere.', tags: ['Gardens', 'Pools', 'Outdoor kitchens'], img: svcLandscape, alt: 'Stone fireplace lounge beside a garden pool' },
+  { title: 'Photorealistic visualisation', text: 'Every space is presented in detailed visualisations before anything is built — often in several options, so decisions are made with confidence.', tags: ['3D', 'Design options'], img: svcViz, alt: 'Evening visualisation of a contemporary apartment with bar and pendants' },
   { title: 'Implementation', text: 'The studio supports the project beyond the drawings, helping turn the approved design into the finished space.', tags: ['On site', 'Coordination'], img: svcImpl, alt: 'Jemma Ter-Grigoryan on a construction site holding the design visualisation' },
-  { title: 'Projects abroad', text: 'Open to worldwide cooperation — the studio works remotely with clients living outside Armenia, such as a recent kitchen project for a client in France.', tags: ['Remote', 'Armenian / English'], img: svcRemote, alt: 'Kitchen option with walnut island designed for a client in France' },
+  { title: 'Projects abroad', text: 'Open to worldwide cooperation — the studio works remotely with clients living outside Armenia, such as a recent kitchen project for a client in France.', tags: ['Remote', 'Armenian / English'], img: svcRemote, alt: 'Kitchen option with walnut island designed for a client in France' },
 ];
 
 const steps = [
-  { title: 'Conversation & brief', text: 'Every project begins with mutual understanding — how you live or work, what you love, what the space has to do. Your lifestyle, taste and the specifics of the space shape everything that follows.', img: stepBrief, alt: 'An empty dining room before the design' },
-  { title: 'Measurement', text: 'The existing space is measured and photographed precisely. These photographs become the “before” of the project — and the reference for every decision.', img: stepMeasure, alt: 'Jemma Ter-Grigoryan reviewing a design board on site' },
-  { title: 'Planning & concept', text: 'Layout, zoning and flow come first — sometimes removing walls or joining spaces — followed by the style direction, colour combinations and material palette.', img: stepPlan, alt: 'Illustrated site plan of a garden design' },
-  { title: 'Visualisation & options', text: 'The design is developed into photorealistic visualisations. Where it helps, the studio prepares alternatives — a different chandelier, a lighter kitchen — so you can compare and choose.', img: stepViz, alt: 'Dining room visualisation with a linear chandelier option' },
+  { title: 'Conversation & brief', text: 'Every project begins with mutual understanding — how you live or work, what you love, what the space has to do. Your lifestyle, taste and the specifics of the space shape everything that follows.', img: stepBrief, alt: 'An empty dining room before the design' },
+  { title: 'Measurement', text: 'The existing space is measured and photographed precisely. These photographs become the “before” of the project — and the reference for every decision.', img: stepMeasure, alt: 'Jemma Ter-Grigoryan reviewing a design board on site' },
+  { title: 'Planning & concept', text: 'Layout, zoning and flow come first — sometimes removing walls or joining spaces — followed by the style direction, colour combinations and material palette.', img: stepPlan, alt: 'Illustrated site plan of a garden design' },
+  { title: 'Visualisation & options', text: 'The design is developed into photorealistic visualisations. Where it helps, the studio prepares alternatives — a different chandelier, a lighter kitchen — so you can compare and choose.', img: stepViz, alt: 'Dining room visualisation with a linear chandelier option' },
   { title: 'Drawings & implementation', text: 'The approved design is prepared for construction and supported through implementation, so the finished space lives up to the visualisation.', img: stepBuild, alt: 'Final dining room visualisation with crystal chandelier' },
 ];
 
@@ -54,7 +54,7 @@ const origin = Astro.site!;
 
 <Base
   title="Interior Design Services in Yerevan"
-  description="Residential and commercial interior design, exterior and landscape design by Jemma Ter-Grigoryan’s studio in Yerevan — measurement, concept, photorealistic visualisation and implementation. Send a project request."
+  description="Residential and commercial interior design, exterior and landscape design by Jemma Ter-Grigoryan’s studio in Yerevan — measurement, concept, photorealistic visualisation and implementation. Send a project request."
   ogImage={heroImg}
   ogImageAlt="Stone bathing suite with a view of Mount Ararat, designed by Interior Design by JTG"
   headerTheme="overlay"
@@ -74,7 +74,7 @@ const origin = Astro.site!;
         <span class="line-mask" style="--i:2"><span><em>live.</em></span></span>
       </h1>
       <div class="ph__lower">
-        <p class="ph__lead" data-reveal style="--delay:0.5s">Interior, exterior and landscape design by Jemma Ter-Grigoryan’s studio in Yerevan — for homes, commercial spaces and gardens, in Armenia and abroad.</p>
+        <p class="ph__lead" data-reveal style="--delay:0.5s">Interior, exterior and landscape design by Jemma Ter-Grigoryan’s studio in Yerevan — for homes, commercial spaces and gardens, in Armenia and abroad.</p>
         <div class="ph__ctas" data-reveal style="--delay:0.65s">
           <a class="btn btn--light" href="#request">Start a project <Arrow /></a>
           <a class="btn btn--ghost ph__ghost" href="/projects/">View projects <Arrow /></a>
@@ -89,11 +89,11 @@ const origin = Astro.site!;
       <div class="philo__label"><span class="eyebrow">Design philosophy</span></div>
       <blockquote class="philo__quote serif" data-reveal>
         <p>“Modern luxury is created not by the number of luxurious things, but by <em>perfect combinations</em>.”</p>
-        <footer class="philo__cite">Jemma Ter-Grigoryan · June 2026 · translated from Armenian</footer>
+        <footer class="philo__cite">Jemma Ter-Grigoryan&nbsp;· June&nbsp;2026&nbsp;· translated from Armenian</footer>
       </blockquote>
       <div class="philo__text prose" data-reveal style="--delay:0.1s">
-        <p>The studio’s work starts from mutual understanding with each client. Every project is created individually — taking into account your lifestyle, your taste and the specifics of the space — so that the result still feels relevant and exceptional years later.</p>
-        <p>The language moves easily between neoclassical warmth and contemporary calm: natural stone, dark timber, concealed light and carefully measured colour. Clients often mention the same thing — the precise use of colour and the harmony it brings to a room.</p>
+        <p>The studio’s work starts from mutual understanding with each client. Every project is created individually — taking into account your lifestyle, your taste and the specifics of the space — so that the result still feels relevant and exceptional years later.</p>
+        <p>The language moves easily between neoclassical warmth and contemporary calm: natural stone, dark timber, concealed light and carefully measured colour. Clients often mention the same thing — the precise use of colour and the harmony it brings to a room.</p>
       </div>
     </div>
   </section>
@@ -138,7 +138,7 @@ const origin = Astro.site!;
       </div>
       <div class="process__steps">
         <span class="eyebrow">Process</span>
-        <h2 class="h2" id="process-title" data-reveal>How a project <em>unfolds</em></h2>
+        <h2 class="h2" id="process-title" data-reveal>How a&nbsp;project <em>unfolds</em></h2>
         <ol role="list" class="process__list">
           {steps.map((s, i) => (
             <li class:list={['process__step', { 'is-active': i === 0 }]} data-story-step>
@@ -204,8 +204,8 @@ const origin = Astro.site!;
       <div class="exp__text">
         <span class="eyebrow">Led by the founder</span>
         <h2 class="h2" data-reveal>Designed by <em>Jemma Ter-Grigoryan</em></h2>
-        <p class="lead" data-reveal>Jemma founded the studio in Yerevan in 2022. Her interiors, exteriors and landscapes are created to reflect each client’s taste, lifestyle and dreams — “design is not just a beautiful look; it is the art of creating an environment.”</p>
-        <p class="muted" data-reveal>She also leads the studio’s design school and travels to international fairs and showrooms — Dubai INDEX in 2024, Qatar in 2025 and Salone del Mobile in Milan in 2026 — bringing current materials, products and ideas back to Yerevan.</p>
+        <p class="lead" data-reveal>Jemma founded the studio in Yerevan in 2022. Her interiors, exteriors and landscapes are created to reflect each client’s taste, lifestyle and dreams — “design is not just a beautiful look; it is the art of creating an environment.”</p>
+        <p class="muted" data-reveal>She also leads the studio’s design school and travels to international fairs and showrooms — Dubai INDEX in 2024, Qatar in 2025 and Salone del Mobile in Milan in 2026 — bringing current materials, products and ideas back to Yerevan.</p>
         <a class="link" href="/about/">About the founder <Arrow /></a>
       </div>
     </div>
@@ -224,7 +224,7 @@ const origin = Astro.site!;
           <ol class="request__next" role="list">
             <li><span class="index-num">01</span> The studio reviews your request.</li>
             <li><span class="index-num">02</span> You are contacted to discuss the brief, scope and next steps.</li>
-            <li><span class="index-num">03</span> A first meeting or call is arranged — in Yerevan or online.</li>
+            <li><span class="index-num">03</span> A first meeting or call is arranged — in Yerevan or online.</li>
           </ol>
           <div class="request__direct">
             <p class="muted">Prefer to talk directly?</p>
@@ -245,7 +245,7 @@ const origin = Astro.site!;
   .philo__label { grid-column: 1 / span 3; padding-top: 1rem; }
   .philo__quote { grid-column: 4 / span 9; font-size: clamp(1.9rem, 1.1rem + 3vw, 4.4rem); line-height: 1.08; letter-spacing: -0.01em; }
   .philo__quote em { color: var(--wine); }
-  .philo__cite { margin-top: 1.5rem; font-family: var(--font-sans); font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .philo__cite { margin-top: 1.5rem; font-family: var(--font-sans); font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);  line-height: 1.6; text-wrap: balance; }
   .philo__text { grid-column: 7 / span 6; margin-top: clamp(40px, 5vw, 72px); }
   @media (max-width: 900px) { .philo__label, .philo__quote, .philo__text { grid-column: 1 / -1; } .philo__label { margin-bottom: 1.5rem; } }
 
@@ -290,7 +290,7 @@ const origin = Astro.site!;
   .process__list { margin-top: clamp(40px, 6vw, 96px); }
   .process__step { min-height: 52vh; padding-block: 2rem; border-top: 1px solid var(--line); display: grid; gap: 1rem; align-content: start; }
   .process__step .process__title, .process__step p { transition: color 0.6s var(--ease-out); }
-  .process__step:not(.is-active) .process__title { color: #9a8f86; }
+  .process__step:not(.is-active) .process__title { color: #7d726a; }
   .process__step:not(.is-active) p { color: var(--muted); }
   .process__step:last-child { min-height: 40vh; }
   .process__title { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.6rem); }
@@ -328,7 +328,9 @@ const origin = Astro.site!;
   .request__intro { grid-column: 1 / span 4; }
   .request__sticky { position: sticky; top: calc(var(--header-h) + 32px); display: grid; gap: 1.5rem; }
   .request__next { display: grid; gap: 0.8rem; padding-block: 1.25rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: var(--fs-sm); }
-  .request__next li { display: flex; gap: 0.8rem; }
+  .request__next li { display: flex; gap: 0.8rem; text-wrap: pretty; }
+  .request__next .index-num { flex: none; min-width: 1.4em; }
+  .request__intro .h2 { font-size: clamp(2.25rem, 1.5rem + 2vw, 3.5rem); }
   .request__direct { display: grid; gap: 0.3rem; }
   .request__phone { font-weight: 420; font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.2; }
   .footer-like { font-size: var(--fs-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }

@@ -23,7 +23,7 @@ const id = `ba-${Math.random().toString(36).slice(2, 8)}`;
     <div class="ba__layer ba__after"><Img src={after} alt={afterAlt} size={size} /></div>
     <div class="ba__layer ba__before" data-ba-before><Img src={before} alt={beforeAlt} size={size} /></div>
     <span class="ba__label ba__label--before" aria-hidden="true">Before</span>
-    <span class="ba__label ba__label--after" aria-hidden="true">After · Visualisation</span>
+    <span class="ba__label ba__label--after" aria-hidden="true">After<span class="ba__label-x"> · Visualisation</span></span>
     <div class="ba__handle" aria-hidden="true">
       <span class="ba__knob">
         <svg viewBox="0 0 24 12" fill="none"><path d="M7 1 2 6l5 5M17 1l5 5-5 5" stroke="currentColor" stroke-width="1.2" /></svg>
@@ -65,7 +65,13 @@ const id = `ba-${Math.random().toString(36).slice(2, 8)}`;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     pointer-events: none;
+    white-space: nowrap;
+    z-index: 2;
     transition: opacity 0.4s var(--ease-out);
+  }
+  @media (max-width: 600px) {
+    .ba__label { letter-spacing: 0.14em; padding: 0.45em 0.7em; }
+    .ba__label-x { display: none; }
   }
   .ba__label--before { left: clamp(12px, 2vw, 24px); }
   .ba__label--after { right: clamp(12px, 2vw, 24px); }

@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
 
     <div class="footer-grid">
       <div class="footer-col footer-col--wide">
-        <p class="footer-statement serif">Design must tell the story first. Real comfort — visual and physical — is vital to any place we touch.</p>
+        <p class="footer-statement serif">Design must tell the story first. Real comfort — visual and physical — is vital to any place we touch.</p>
       </div>
 
       <div class="footer-col">
@@ -40,14 +40,14 @@ const year = new Date().getFullYear();
         <h2 class="footer-h">Contact</h2>
         <a class="footer-link" href={site.phoneHref}>{site.phone}</a>
         <a class="footer-link" href={`mailto:${site.email}`}>{site.email}</a>
-        <p class="muted footer-small">Studio &amp; school · Armenian / English</p>
+        <p class="muted footer-small"><span>Studio &amp; school</span><span>Armenian&nbsp;/&nbsp;English</span></p>
       </div>
 
       <div class="footer-col">
         <h2 class="footer-h">Follow</h2>
-        <a class="footer-link" href={site.social.studioInstagram.href} target="_blank" rel="noopener">Studio — Instagram</a>
-        <a class="footer-link" href={site.social.schoolInstagram.href} target="_blank" rel="noopener">School — Instagram</a>
-        <a class="footer-link" href={site.social.founderInstagram.href} target="_blank" rel="noopener">Jemma — Instagram</a>
+        <a class="footer-link" href={site.social.studioInstagram.href} target="_blank" rel="noopener">Studio — Instagram</a>
+        <a class="footer-link" href={site.social.schoolInstagram.href} target="_blank" rel="noopener">School — Instagram</a>
+        <a class="footer-link" href={site.social.founderInstagram.href} target="_blank" rel="noopener">Jemma — Instagram</a>
         <a class="footer-link" href={site.social.facebook.href} target="_blank" rel="noopener">Facebook</a>
         <a class="footer-link" href={site.social.youtube.href} target="_blank" rel="noopener">YouTube</a>
       </div>
@@ -77,6 +77,7 @@ const year = new Date().getFullYear();
   .footer-cta__item {
     position: relative;
     display: grid;
+    grid-template-rows: auto 1fr auto;
     gap: 1.25rem;
     padding: clamp(32px, 4vw, 64px) clamp(0px, 2vw, 32px) clamp(32px, 4vw, 64px) 0;
     transition: color 0.5s var(--ease-out);
@@ -103,6 +104,7 @@ const year = new Date().getFullYear();
   .footer-link { width: fit-content; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.6s var(--ease-expo); }
   .footer-link:hover { background-size: 100% 1px; }
   .footer-small { font-size: var(--fs-xs); margin-top: 0.4rem; }
+  .footer-small span { display: block; }
   @media (max-width: 1100px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } .footer-col--wide { grid-column: 1 / -1; } }
   @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
 

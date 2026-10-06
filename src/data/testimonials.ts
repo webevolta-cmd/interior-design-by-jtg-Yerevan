@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'Every time I admire your works — you’re very professional and have your own signature in this field. I appreciate the precise use of colours in interiors; colour harmony works so well in all your works.',
+      'Every time I admire your works — you’re very professional and have your own signature in this field. I appreciate the precise use of colours in interiors; colour harmony works so well in all your works.',
     name: 'Tatevik Urutian',
     role: 'Facebook recommendation',
     date: 'October 2022',
@@ -43,7 +43,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'JTG school was a great place for me to start an endeavour in a completely new field. A great advantage was that the school offers small groups, which made it really intense — but you can see a lot of progress week by week. All teachers have sound subject knowledge and explain things in a way students can understand clearly. The school felt like a big family.',
+      'JTG school was a great place for me to start an endeavour in a completely new field. A great advantage was that the school offers small groups, which made it really intense — but you can see a lot of progress week by week. All teachers have sound subject knowledge and explain things in a way students can understand clearly. The school felt like a big family.',
     name: 'Anna Mamikonyan',
     role: 'Graduate',
     date: 'October 2023',
@@ -68,7 +68,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'I studied interior design at this school. The school has a professional team — I love my design school and am very happy to be a part of it.',
+      'I studied interior design at this school. The school has a professional team — I love my design school and am very happy to be a part of it.',
     name: 'Susik Harutyunyan',
     role: 'Graduate',
     date: 'November 2025',
