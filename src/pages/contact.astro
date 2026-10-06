@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Arrow from '../components/Arrow.astro';
+import { site } from '../data/site';
+import { studioSchema, schoolSchema, breadcrumbSchema } from '../data/schema';
+import classroom from '../assets/school/certificates-b.jpg';
+
+const origin = Astro.site!;
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${site.address.lng - 0.006}%2C${site.address.lat - 0.0035}%2C${site.address.lng + 0.006}%2C${site.address.lat + 0.0035}&layer=mapnik&marker=${site.address.lat}%2C${site.address.lng}`;
+---
+
+<Base
+  title="Contact — Studio & School, Koryun St. 21, Yerevan"
+  description="Contact Interior Design Studio & School by JTG in Yerevan: Koryun St. 21, 2nd floor, Kentron. Phone +374 98 722727, email jemmatergrigoryan@gmail.com. Design enquiries and school admissions."
+  schema={[studioSchema(origin), schoolSchema(origin), breadcrumbSchema(origin, [{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact/' }])]}
+>
+  <section class="ch">
+    <div class="container">
+      <nav class="crumbs crumbs--ink" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span></nav>
+      <h1 class="display ch__title" data-reveal="lines">
+        <span class="line-mask" style="--i:0"><span>Visit, call</span></span>
+        <span class="line-mask" style="--i:1"><span>or <em>write.</em></span></span>
+      </h1>
+      <p class="lead ch__lead" data-reveal style="--delay:0.3s">The studio and the school share one address in the centre of Yerevan. Choose the right channel below — or simply call.</p>
+    </div>
+  </section>
+
+  <section class="cc section-sm">
+    <div class="container cc__grid">
+      <article class="cc__card" data-reveal>
+        <span class="eyebrow">Interior design studio</span>
+        <h2 class="cc__title">Design <em>enquiries</em></h2>
+        <p class="muted">Residential, commercial, exterior and landscape projects — in Armenia and abroad.</p>
+        <ul class="cc__list" role="list">
+          <li><span>Phone</span><a href={site.phoneHref}>{site.phone}</a></li>
+          <li><span>Email</span><a href={`mailto:${site.email}?subject=Interior%20design%20project`}>{site.email}</a></li>
+          <li><span>Instagram</span><a href={site.social.studioInstagram.href} target="_blank" rel="noopener">{site.social.studioInstagram.label}</a></li>
+          <li><span>Facebook</span><a href={site.social.facebook.href} target="_blank" rel="noopener">{site.social.facebook.label}</a></li>
+        </ul>
+        <a class="btn" href="/interior-design/#request">Send a project request <Arrow /></a>
+      </article>
+
+      <article class="cc__card cc__card--dark on-night" data-reveal style="--delay:0.1s">
+        <span class="eyebrow">Interior design school</span>
+        <h2 class="cc__title">Admissions &amp; <em>courses</em></h2>
+        <p class="muted">Course details, tuition, schedules and the next available group — in person or online.</p>
+        <ul class="cc__list" role="list">
+          <li><span>Phone</span><a href={site.phoneHref}>{site.phone}</a></li>
+          <li><span>Email</span><a href={`mailto:${site.email}?subject=Interior%20design%20course`}>{site.email}</a></li>
+          <li><span>Instagram</span><a href={site.social.schoolInstagram.href} target="_blank" rel="noopener">{site.social.schoolInstagram.label}</a></li>
+          <li><span>YouTube</span><a href={site.social.youtube.href} target="_blank" rel="noopener">Lessons &amp; student work</a></li>
+        </ul>
+        <a class="btn" href="/design-school/#apply">Apply / request information <Arrow /></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="visit section">
+    <div class="container grid-12">
+      <div class="visit__text">
+        <span class="eyebrow">Address</span>
+        <address class="visit__addr serif" data-reveal>
+          {site.address.street}<br />
+          {site.address.district}, {site.address.city} {site.address.postalCode}<br />
+          {site.address.country}
+        </address>
+        <p class="muted">Please call ahead to arrange a meeting or a visit to the school.</p>
+        <div class="visit__links">
+          <a class="link" href={site.maps.google} target="_blank" rel="noopener">Open in Google Maps <Arrow dir="up-right" /></a>
+          <a class="link" href={site.maps.twoGis} target="_blank" rel="noopener">Open in 2GIS <Arrow dir="up-right" /></a>
+        </div>
+        <div class="visit__founder">
+          <span class="eyebrow">Founder</span>
+          <p>{site.founder} · <a href={site.social.founderInstagram.href} target="_blank" rel="noopener">{site.social.founderInstagram.label}</a></p>
+        </div>
+      </div>
+      <div class="visit__map">
+        <div class="map" data-reveal="mask">
+          <iframe title="Map: Koryun St. 21, Yerevan" src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="visit__img media" data-reveal="mask" style="--delay:0.15s">
+          <Img src={classroom} alt="Inside the JTG school at Koryun 21: the founder with a graduate in front of the JTG logo wall" size="third" position="50% 35%" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ch { padding-top: calc(var(--header-h) + clamp(40px, 8vh, 96px)); padding-bottom: clamp(32px, 4vw, 64px); }
+  .ch__title { margin-top: 1.5rem; }
+  .ch__title em { color: var(--wine); }
+  .ch__lead { max-width: 48ch; margin-top: 1.75rem; }
+
+  .cc__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+  .cc__card { display: grid; gap: 1.25rem; align-content: start; justify-items: start; padding: clamp(28px, 4vw, 56px); background: var(--paper-2); border: 1px solid var(--line); }
+  .cc__card--dark { background: var(--night); border-color: var(--night); }
+  .cc__title { font-size: clamp(2rem, 1.4rem + 2vw, 3.4rem); line-height: 1; }
+  .cc__list { width: 100%; border-top: 1px solid var(--line); margin-block: 0.5rem 0.75rem; }
+  .cc__card--dark .cc__list, .cc__card--dark .cc__list li { border-color: var(--line-night); }
+  .cc__list li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding-block: 0.9rem; border-bottom: 1px solid var(--line); }
+  .cc__list span { font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding-top: 0.25em; }
+  .cc__card--dark .cc__list span { color: var(--on-night-muted); }
+  .cc__list a { overflow-wrap: anywhere; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.6s var(--ease-expo); width: fit-content; }
+  .cc__list a:hover { background-size: 100% 1px; }
+  @media (max-width: 860px) { .cc__grid { grid-template-columns: 1fr; } }
+  @media (max-width: 420px) { .cc__list li { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+  .visit__text { grid-column: 1 / span 4; display: grid; gap: 1.5rem; align-content: start; justify-items: start; }
+  .visit__addr { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.6rem); line-height: 1.2; }
+  .visit__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
+  .visit__founder { display: grid; gap: 0.6rem; padding-top: 1.25rem; border-top: 1px solid var(--line); width: 100%; }
+  .visit__founder a { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }
+  .visit__map { grid-column: 6 / -1; display: grid; grid-template-columns: 2fr 1fr; gap: var(--gutter); align-items: end; }
+  .map { position: relative; aspect-ratio: 4 / 3; background: var(--paper-3); overflow: hidden; }
+  .map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(1) sepia(0.25) contrast(0.95) brightness(1.02); }
+  .visit__img { aspect-ratio: 3 / 4; }
+  @media (max-width: 900px) {
+    .visit__text, .visit__map { grid-column: 1 / -1; }
+    .visit__map { margin-top: 2.5rem; grid-template-columns: 1fr; }
+    .visit__img { display: none; }
+  }
+</style>

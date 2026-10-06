@@ -1,0 +1,340 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Arrow from '../components/Arrow.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Testimonials from '../components/Testimonials.astro';
+import DesignRequestForm from '../components/DesignRequestForm.astro';
+import { getProject } from '../data/projects';
+import { testimonials } from '../data/testimonials';
+import { site } from '../data/site';
+import { studioSchema, breadcrumbSchema } from '../data/schema';
+
+import heroImg from '../assets/projects/ararat-view/bath.jpg';
+import svcResidential from '../assets/projects/burgundy-residence/kitchen-dining.jpg';
+import svcCommercial from '../assets/projects/patisserie/salon.jpg';
+import svcExterior from '../assets/projects/mediterranean-villa/facade.jpg';
+import svcLandscape from '../assets/projects/garden-landscape/fire-lounge.jpg';
+import svcViz from '../assets/projects/city-apartment/evening.jpg';
+import svcImpl from '../assets/people/founder-site-visit.jpg';
+import svcRemote from '../assets/projects/open-kitchen/kitchen-b.jpg';
+import stepBrief from '../assets/projects/burgundy-residence/before-dining.jpg';
+import stepMeasure from '../assets/people/founder-site-visit-b.jpg';
+import stepPlan from '../assets/projects/garden-landscape/plan.jpg';
+import stepViz from '../assets/projects/burgundy-residence/dining-alt.jpg';
+import stepBuild from '../assets/projects/burgundy-residence/dining.jpg';
+import founderImg from '../assets/people/founder-event.jpg';
+
+const services = [
+  { title: 'Residential interiors', text: 'Apartments and houses — living rooms, kitchens, bedrooms, bathrooms, children’s rooms, wardrobes and entrances — planned around the way you live.', tags: ['Apartments', 'Houses', 'Single rooms'], img: svcResidential, alt: 'Burgundy and cream kitchen with marble splashback and round table' },
+  { title: 'Commercial interiors', text: 'Cafés and pâtisseries, offices, learning centres and other places where people meet, work and buy — designed to be functional and memorable.', tags: ['Hospitality', 'Offices', 'Education'], img: svcCommercial, alt: 'Pâtisserie seating area with blush stools beside a timber counter' },
+  { title: 'Exterior design', text: 'Facades and house exteriors composed together with the interior, using the same colours, natural stones and materials inside and out.', tags: ['Facades', 'Lighting'], img: svcExterior, alt: 'Arched white villa facade lit at dusk' },
+  { title: 'Landscape design', text: 'Gardens, pools, terraces, outdoor kitchens and fire lounges — from the site plan to the evening atmosphere.', tags: ['Gardens', 'Pools', 'Outdoor kitchens'], img: svcLandscape, alt: 'Stone fireplace lounge beside a garden pool' },
+  { title: 'Photorealistic visualisation', text: 'Every space is presented in detailed visualisations before anything is built — often in several options, so decisions are made with confidence.', tags: ['3D', 'Design options'], img: svcViz, alt: 'Evening visualisation of a contemporary apartment with bar and pendants' },
+  { title: 'Implementation', text: 'The studio supports the project beyond the drawings, helping turn the approved design into the finished space.', tags: ['On site', 'Coordination'], img: svcImpl, alt: 'Jemma Ter-Grigoryan on a construction site holding the design visualisation' },
+  { title: 'Projects abroad', text: 'Open to worldwide cooperation — the studio works remotely with clients living outside Armenia, such as a recent kitchen project for a client in France.', tags: ['Remote', 'Armenian / English'], img: svcRemote, alt: 'Kitchen option with walnut island designed for a client in France' },
+];
+
+const steps = [
+  { title: 'Conversation & brief', text: 'Every project begins with mutual understanding — how you live or work, what you love, what the space has to do. Your lifestyle, taste and the specifics of the space shape everything that follows.', img: stepBrief, alt: 'An empty dining room before the design' },
+  { title: 'Measurement', text: 'The existing space is measured and photographed precisely. These photographs become the “before” of the project — and the reference for every decision.', img: stepMeasure, alt: 'Jemma Ter-Grigoryan reviewing a design board on site' },
+  { title: 'Planning & concept', text: 'Layout, zoning and flow come first — sometimes removing walls or joining spaces — followed by the style direction, colour combinations and material palette.', img: stepPlan, alt: 'Illustrated site plan of a garden design' },
+  { title: 'Visualisation & options', text: 'The design is developed into photorealistic visualisations. Where it helps, the studio prepares alternatives — a different chandelier, a lighter kitchen — so you can compare and choose.', img: stepViz, alt: 'Dining room visualisation with a linear chandelier option' },
+  { title: 'Drawings & implementation', text: 'The approved design is prepared for construction and supported through implementation, so the finished space lives up to the visualisation.', img: stepBuild, alt: 'Final dining room visualisation with crystal chandelier' },
+];
+
+const highlight = ['burgundy-neoclassical-residence', 'mediterranean-villa', 'patisserie', 'joined-apartment-kitchen'].map((s) => getProject(s)!);
+const bath = getProject('dark-stone-bathroom')!.transformations![0];
+const city = getProject('contemporary-city-apartment')!.transformations![0];
+const hall = getProject('gallery-hallway')!.transformations![0];
+const clientQuotes = testimonials.filter((t) => t.audience === 'client');
+const origin = Astro.site!;
+---
+
+<Base
+  title="Interior Design Services in Yerevan"
+  description="Residential and commercial interior design, exterior and landscape design by Jemma Ter-Grigoryan’s studio in Yerevan — measurement, concept, photorealistic visualisation and implementation. Send a project request."
+  ogImage={heroImg}
+  ogImageAlt="Stone bathing suite with a view of Mount Ararat, designed by Interior Design by JTG"
+  headerTheme="overlay"
+  schema={[studioSchema(origin), breadcrumbSchema(origin, [{ name: 'Home', path: '/' }, { name: 'Interior Design', path: '/interior-design/' }])]}
+>
+  <!-- HERO -->
+  <section class="ph on-night" data-hero-scroll>
+    <div class="ph__media" data-hero-media>
+      <Img src={heroImg} alt="Bathing suite with a sculptural glass bath facing Mount Ararat at dusk" size="full" priority />
+    </div>
+    <div class="ph__shade" aria-hidden="true"></div>
+    <div class="ph__content container" data-hero-content>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Interior Design</span></nav>
+      <h1 class="display ph__title" data-reveal="lines">
+        <span class="line-mask" style="--i:0"><span>Spaces shaped</span></span>
+        <span class="line-mask" style="--i:1"><span>around how you</span></span>
+        <span class="line-mask" style="--i:2"><span><em>live.</em></span></span>
+      </h1>
+      <div class="ph__lower">
+        <p class="ph__lead" data-reveal style="--delay:0.5s">Interior, exterior and landscape design by Jemma Ter-Grigoryan’s studio in Yerevan — for homes, commercial spaces and gardens, in Armenia and abroad.</p>
+        <div class="ph__ctas" data-reveal style="--delay:0.65s">
+          <a class="btn btn--light" href="#request">Start a project <Arrow /></a>
+          <a class="btn btn--ghost ph__ghost" href="/projects/">View projects <Arrow /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philo section">
+    <div class="container grid-12">
+      <div class="philo__label"><span class="eyebrow">Design philosophy</span></div>
+      <blockquote class="philo__quote serif" data-reveal>
+        <p>“Modern luxury is created not by the number of luxurious things, but by <em>perfect combinations</em>.”</p>
+        <footer class="philo__cite">Jemma Ter-Grigoryan · June 2026 · translated from Armenian</footer>
+      </blockquote>
+      <div class="philo__text prose" data-reveal style="--delay:0.1s">
+        <p>The studio’s work starts from mutual understanding with each client. Every project is created individually — taking into account your lifestyle, your taste and the specifics of the space — so that the result still feels relevant and exceptional years later.</p>
+        <p>The language moves easily between neoclassical warmth and contemporary calm: natural stone, dark timber, concealed light and carefully measured colour. Clients often mention the same thing — the precise use of colour and the harmony it brings to a room.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section bg-stone" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Services</span>
+          <h2 class="h2" id="services-title" data-reveal>What the studio <em>designs</em></h2>
+        </div>
+        <div class="section-head__aside"><a class="link" href="#request">Discuss your project <Arrow /></a></div>
+      </div>
+      <ol class="svc" role="list">
+        {services.map((s, i) => (
+          <li class="svc__row" data-reveal>
+            <span class="svc__num index-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="svc__title">{s.title}</h3>
+            <div class="svc__body">
+              <p>{s.text}</p>
+              <ul class="svc__tags" role="list">{s.tags.map((t) => <li class="tag">{t}</li>)}</ul>
+            </div>
+            <div class="svc__img media"><Img src={s.img} alt={s.alt} size="thumb" sizes="(min-width: 900px) 240px, 40vw" /></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- PROCESS (sticky storytelling) -->
+  <section class="process section" aria-labelledby="process-title" data-story>
+    <div class="container grid-12">
+      <div class="process__visual">
+        <div class="process__sticky">
+          {steps.map((s, i) => (
+            <div class:list={['process__frame media', { 'is-active': i === 0 }]} data-story-frame>
+              <Img src={s.img} alt={s.alt} size="half" />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="process__steps">
+        <span class="eyebrow">Process</span>
+        <h2 class="h2" id="process-title" data-reveal>How a project <em>unfolds</em></h2>
+        <ol role="list" class="process__list">
+          {steps.map((s, i) => (
+            <li class:list={['process__step', { 'is-active': i === 0 }]} data-story-step>
+              <span class="process__num index-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="process__title">{s.title}</h3>
+              <p>{s.text}</p>
+              <div class="process__mobile-img media"><Img src={s.img} alt="" size="half" /></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="pf section bg-stone">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="h2" data-reveal>Selected <em>work</em></h2>
+        </div>
+        <div class="section-head__aside"><a class="link" href="/projects/">All projects <Arrow /></a></div>
+      </div>
+      <div class="pf__grid">
+        {highlight.map((p, i) => (
+          <ProjectCard project={p} index={i + 1} size="half" ratio={i % 3 === 0 ? '4 / 3' : '4 / 5'} class={`pf__item pf__item--${i + 1}`} parallax />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="tr section" aria-labelledby="tr-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Before / After</span>
+          <h2 class="h2" id="tr-title" data-reveal>The value of a <em>design</em></h2>
+        </div>
+        <div class="section-head__aside"><p class="muted tr__note">The studio’s photographs of existing spaces, compared with its design visualisations for the same rooms. Drag to compare.</p></div>
+      </div>
+      <div class="tr__grid">
+        <div class="tr__wide">
+          <BeforeAfter before={city.before} after={city.after} beforeAlt={city.beforeAlt} afterAlt={city.afterAlt} caption="Contemporary City Apartment · Living room" size="full" />
+        </div>
+        <div class="tr__half">
+          <BeforeAfter before={bath.before} after={bath.after} beforeAlt={bath.beforeAlt} afterAlt={bath.afterAlt} caption="Dark Stone Bathroom" size="half" />
+        </div>
+        <div class="tr__half">
+          <BeforeAfter before={hall.before} after={hall.after} beforeAlt={hall.beforeAlt} afterAlt={hall.afterAlt} caption="Gallery Hallway" size="half" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section class="exp section on-night">
+    <div class="container grid-12">
+      <div class="exp__img media" data-parallax>
+        <Img src={founderImg} alt="Jemma Ter-Grigoryan at a JTG event with material samples and student work" size="half" position="78% 30%" />
+      </div>
+      <div class="exp__text">
+        <span class="eyebrow">Led by the founder</span>
+        <h2 class="h2" data-reveal>Designed by <em>Jemma Ter-Grigoryan</em></h2>
+        <p class="lead" data-reveal>Jemma founded the studio in Yerevan in 2022. Her interiors, exteriors and landscapes are created to reflect each client’s taste, lifestyle and dreams — “design is not just a beautiful look; it is the art of creating an environment.”</p>
+        <p class="muted" data-reveal>She also leads the studio’s design school and travels to international fairs and showrooms — Dubai INDEX in 2024, Qatar in 2025 and Salone del Mobile in Milan in 2026 — bringing current materials, products and ideas back to Yerevan.</p>
+        <a class="link" href="/about/">About the founder <Arrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials items={clientQuotes} title="What clients say" eyebrow="Client trust" />
+
+  <!-- REQUEST FORM -->
+  <section class="request section bg-stone" id="request" aria-labelledby="request-title">
+    <div class="container grid-12">
+      <aside class="request__intro">
+        <div class="request__sticky">
+          <span class="eyebrow">Project request</span>
+          <h2 class="h2" id="request-title">Start an interior design <em>project</em></h2>
+          <p class="lead">Tell the studio about your space and what you imagine for it. Attach a plan or a few photos if you have them.</p>
+          <ol class="request__next" role="list">
+            <li><span class="index-num">01</span> The studio reviews your request.</li>
+            <li><span class="index-num">02</span> You are contacted to discuss the brief, scope and next steps.</li>
+            <li><span class="index-num">03</span> A first meeting or call is arranged — in Yerevan or online.</li>
+          </ol>
+          <div class="request__direct">
+            <p class="muted">Prefer to talk directly?</p>
+            <a href={site.phoneHref} class="request__phone serif">{site.phone}</a>
+            <a href={`mailto:${site.email}`} class="footer-like">{site.email}</a>
+          </div>
+        </div>
+      </aside>
+      <div class="request__form">
+        <DesignRequestForm />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Philosophy */
+  .philo__label { grid-column: 1 / span 3; padding-top: 1rem; }
+  .philo__quote { grid-column: 4 / span 9; font-size: clamp(1.9rem, 1.1rem + 3vw, 4.4rem); line-height: 1.08; letter-spacing: -0.02em; }
+  .philo__quote em { color: var(--wine); }
+  .philo__cite { margin-top: 1.5rem; font-family: var(--font-sans); font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .philo__text { grid-column: 7 / span 6; margin-top: clamp(40px, 5vw, 72px); }
+  @media (max-width: 900px) { .philo__label, .philo__quote, .philo__text { grid-column: 1 / -1; } .philo__label { margin-bottom: 1.5rem; } }
+
+  /* Services */
+  .svc { border-top: 1px solid var(--line-strong); }
+  .svc__row {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 4fr) minmax(0, 5fr) 220px;
+    gap: var(--gutter);
+    align-items: start;
+    padding-block: clamp(24px, 3vw, 40px);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .svc__num { padding-top: 0.5rem; }
+  .svc__title { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.8rem); line-height: 1.05; }
+  .svc__body { display: grid; gap: 1rem; padding-top: 0.5rem; }
+  .svc__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .svc__img { aspect-ratio: 4 / 3; }
+  .svc__img :global(img) { filter: saturate(0.85); transition: transform 1.2s var(--ease-expo), filter 0.8s; }
+  .svc__row:hover .svc__img :global(img) { transform: scale(1.06); filter: none; }
+  @media (max-width: 1000px) {
+    .svc__row { grid-template-columns: 3rem 1fr 160px; }
+    .svc__body { grid-column: 2 / 3; }
+    .svc__img { grid-column: 3; grid-row: 1 / span 2; }
+  }
+  @media (max-width: 600px) {
+    .svc__row { grid-template-columns: 2.5rem 1fr; }
+    .svc__img { grid-column: 1 / -1; grid-row: auto; }
+    .svc__body { grid-column: 1 / -1; }
+  }
+
+  /* Process */
+  .process__visual { grid-column: 1 / span 6; }
+  .process__sticky { position: sticky; top: calc(var(--header-h) + 32px); aspect-ratio: 4 / 5; max-height: calc(100vh - var(--header-h) - 64px); }
+  .process__frame { position: absolute; inset: 0; opacity: 0; clip-path: inset(0 0 100% 0); transition: clip-path 1.1s var(--ease-expo), opacity 0s linear 1.1s; }
+  .process__frame.is-active { opacity: 1; clip-path: inset(0); z-index: 1; transition: clip-path 1.1s var(--ease-expo), opacity 0s; }
+  .process__frame :global(img) { transform: scale(1.08); transition: transform 2s var(--ease-expo); }
+  .process__frame.is-active :global(img) { transform: none; }
+  :global(.no-js) .process__frame:first-child { opacity: 1; clip-path: none; }
+  .process__steps { grid-column: 8 / -1; }
+  .process__steps .h2 { margin-top: 1.4rem; }
+  .process__list { margin-top: clamp(40px, 6vw, 96px); }
+  .process__step { min-height: 52vh; padding-block: 2rem; border-top: 1px solid var(--line); display: grid; gap: 1rem; align-content: start; }
+  .process__step .process__title, .process__step p { transition: color 0.6s var(--ease-out); }
+  .process__step:not(.is-active) .process__title { color: #9a8f86; }
+  .process__step:not(.is-active) p { color: var(--muted); }
+  .process__step:last-child { min-height: 40vh; }
+  .process__title { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.6rem); }
+  .process__step p { max-width: 46ch; color: var(--ink-2); }
+  .process__mobile-img { display: none; }
+  @media (max-width: 900px) {
+    .process__visual { display: none; }
+    .process__steps { grid-column: 1 / -1; }
+    .process__step { min-height: 0; }
+    .process__step:not(.is-active) .process__title { color: inherit; }
+    .process__mobile-img { display: block; aspect-ratio: 3 / 2; margin-top: 0.75rem; }
+  }
+
+  /* Portfolio */
+  .pf__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(48px, 6vw, 96px) var(--gutter); }
+  .pf__grid :global(.pf__item--1) { grid-column: 1 / span 7; }
+  .pf__grid :global(.pf__item--2) { grid-column: 9 / span 4; margin-top: 18%; }
+  .pf__grid :global(.pf__item--3) { grid-column: 1 / span 5; }
+  .pf__grid :global(.pf__item--4) { grid-column: 7 / span 6; margin-top: 10%; }
+  @media (max-width: 760px) { .pf__grid :global(.pcard) { grid-column: 1 / -1 !important; margin-top: 0 !important; } }
+
+  /* Before / After */
+  .tr__note { max-width: 38ch; font-size: var(--fs-sm); text-align: right; }
+  .tr__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 72px) var(--gutter); }
+  .tr__wide { grid-column: 1 / -1; }
+  @media (max-width: 900px) { .tr__note { text-align: left; } }
+  @media (max-width: 760px) { .tr__grid { grid-template-columns: 1fr; } }
+
+  /* Expertise */
+  .exp__img { grid-column: 1 / span 5; aspect-ratio: 4 / 5; }
+  .exp__text { grid-column: 7 / -1; align-self: center; display: grid; gap: 1.6rem; justify-items: start; }
+  @media (max-width: 900px) { .exp__img, .exp__text { grid-column: 1 / -1; } .exp__text { margin-top: 2.5rem; } }
+
+  /* Request */
+  .request__intro { grid-column: 1 / span 4; }
+  .request__sticky { position: sticky; top: calc(var(--header-h) + 32px); display: grid; gap: 1.5rem; }
+  .request__next { display: grid; gap: 0.8rem; padding-block: 1.25rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: var(--fs-sm); }
+  .request__next li { display: flex; gap: 0.8rem; }
+  .request__direct { display: grid; gap: 0.3rem; }
+  .request__phone { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.2; }
+  .footer-like { font-size: var(--fs-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }
+  .request__form { grid-column: 6 / -1; }
+  @media (max-width: 1000px) {
+    .request__intro, .request__form { grid-column: 1 / -1; }
+    .request__sticky { position: static; margin-bottom: 3rem; }
+  }
+</style>

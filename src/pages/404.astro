@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import Img from '../components/Img.astro';
+import hall from '../assets/projects/gallery-hallway/hallway.jpg';
+---
+
+<Base title="Page not found" description="The page you are looking for could not be found." noindex>
+  <section class="nf">
+    <div class="container nf__grid">
+      <div class="nf__text">
+        <p class="eyebrow">Error 404</p>
+        <h1 class="display">This door <em>leads nowhere.</em></h1>
+        <p class="lead">The page may have moved. Try one of these instead:</p>
+        <ul class="nf__links" role="list">
+          <li><a class="link" href="/">Home <Arrow /></a></li>
+          <li><a class="link" href="/interior-design/">Interior Design <Arrow /></a></li>
+          <li><a class="link" href="/design-school/">Design School <Arrow /></a></li>
+          <li><a class="link" href="/projects/">Projects <Arrow /></a></li>
+          <li><a class="link" href="/contact/">Contact <Arrow /></a></li>
+        </ul>
+      </div>
+      <div class="nf__img media"><Img src={hall} alt="A quiet corridor with walnut doors and an illuminated mirror" size="third" /></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { padding-top: calc(var(--header-h) + 64px); padding-bottom: 96px; }
+  .nf__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); align-items: center; }
+  .nf__text { grid-column: 1 / span 7; display: grid; gap: 1.5rem; justify-items: start; }
+  .nf__text em { color: var(--wine); }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
+  .nf__img { grid-column: 9 / -1; aspect-ratio: 4 / 5; }
+  @media (max-width: 900px) { .nf__text, .nf__img { grid-column: 1 / -1; } .nf__img { max-width: 360px; } }
+</style>

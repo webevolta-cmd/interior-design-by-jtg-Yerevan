@@ -1,0 +1,236 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import Arrow from '../../components/Arrow.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import { projects, type Project } from '../../data/projects';
+import { breadcrumbSchema, ids } from '../../data/schema';
+
+export function getStaticPaths() {
+  return projects.map((project, i) => ({
+    params: { slug: project.slug },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+interface Props { project: Project; next: Project }
+const { project: p, next } = Astro.props;
+const origin = Astro.site!;
+
+const large = async (src: ImageMetadata) => (await getImage({ src, width: Math.min(src.width, 2000), format: 'webp', quality: 80 })).src;
+const shots = [p.cover, ...p.gallery];
+const bigs = await Promise.all(shots.map((s) => large(s.src)));
+
+const meta: [string, string][] = [
+  ['Category', p.category],
+  ['Type', p.type],
+  ...(p.location ? ([['Location', p.location]] as [string, string][]) : []),
+  ...(p.client ? ([['Client', p.client]] as [string, string][]) : []),
+  ['Spaces', p.spaces.join(', ')],
+  ['Published', p.publishedLabel],
+  ['Imagery', p.transformations?.length ? 'Design visualisations · before photographs' : 'Design visualisations'],
+];
+
+const schema = [
+  breadcrumbSchema(origin, [
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects/' },
+    { name: p.title, path: `/projects/${p.slug}/` },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: p.title,
+    description: p.summary,
+    genre: `${p.category} — ${p.type}`,
+    dateCreated: p.published,
+    creator: { '@id': ids(origin).studio },
+    url: new URL(`/projects/${p.slug}/`, origin).href,
+  },
+];
+// Gallery rhythm
+const shapes = ['g-wide', 'g-tall', 'g-tall', 'g-wide', 'g-half', 'g-half'];
+---
+
+<Base
+  title={`${p.title} — ${p.type}`}
+  description={`${p.summary} ${p.category} project by Interior Design by JTG, Yerevan (${p.publishedLabel}).`}
+  ogImage={p.cover.src}
+  ogImageAlt={p.cover.alt}
+  headerTheme="overlay"
+  schema={schema}
+  footerCta={false}
+>
+  <section class="ph on-night pr-hero" data-hero-scroll>
+    <div class="ph__media" data-hero-media>
+      <Img src={p.cover.src} alt={p.cover.alt} size="full" priority />
+    </div>
+    <div class="ph__shade" aria-hidden="true"></div>
+    <div class="ph__content container" data-hero-content>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/projects/">Projects</a><span aria-hidden="true">/</span><span aria-current="page">{p.title}</span></nav>
+      <p class="eyebrow pr-hero__eyebrow" data-reveal style="--delay:0.1s">{p.category} · {p.publishedLabel}</p>
+      <h1 class="h1 pr-hero__title" data-reveal style="--delay:0.2s">{p.title}</h1>
+    </div>
+  </section>
+
+  <section class="pr-intro section">
+    <div class="container grid-12">
+      <div class="pr-intro__lead">
+        <p class="pr-intro__summary serif" data-reveal>{p.summary}</p>
+      </div>
+      <dl class="meta-list pr-intro__meta" data-reveal style="--delay:0.1s">
+        {meta.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+      </dl>
+      <div class="pr-intro__approach prose">
+        <h2 class="eyebrow pr-sub">Design approach</h2>
+        {p.approach.map((para) => <p data-reveal>{para}</p>)}
+      </div>
+      {p.palette && (
+        <div class="pr-intro__palette">
+          <h2 class="eyebrow pr-sub">Materials &amp; palette</h2>
+          <ul class="pr-palette" role="list">
+            {p.palette.map((m) => <li class="tag">{m}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {p.transformations?.length ? (
+    <section class="pr-ba section-sm" aria-labelledby="pr-ba-title">
+      <div class="container">
+        <div class="pr-ba__head">
+          <h2 class="h3" id="pr-ba-title">Before <em>&amp;</em> after</h2>
+          <p class="muted">Drag the divider to compare the studio’s photograph of the existing space with its design visualisation.</p>
+        </div>
+        <div class:list={['pr-ba__grid', { 'pr-ba__grid--two': p.transformations.length > 1 }]}>
+          {p.transformations.map((t) => (
+            <BeforeAfter before={t.before} after={t.after} beforeAlt={t.beforeAlt} afterAlt={t.afterAlt} caption={t.label} size={p.transformations!.length > 1 ? 'half' : 'full'} />
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : null}
+
+  <section class="pr-gallery section" aria-labelledby="pr-gal-title">
+    <div class="container">
+      <h2 class="visually-hidden" id="pr-gal-title">Gallery</h2>
+      <div class="gal">
+        {shots.map((s, i) => (
+          <figure class:list={['gal__item', shapes[i % shapes.length]]}>
+            <a class="media gal__media" href={bigs[i]} data-lightbox data-alt={s.alt} data-caption={s.caption ?? p.title} data-cursor-target="Enlarge" data-reveal="mask" data-parallax={i % 3 === 0 ? '' : undefined}>
+              <Img src={s.src} alt={s.alt} size={shapes[i % shapes.length] === 'g-wide' ? 'large' : 'half'} />
+            </a>
+            <figcaption class="caption"><span>{s.caption ?? 'Overview'}</span><span>{String(i + 1).padStart(2, '0')} / {String(shots.length).padStart(2, '0')}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {p.quote && (
+    <section class="pr-quote section-sm">
+      <div class="container">
+        <blockquote class="pr-quote__text serif" data-reveal>
+          <p>“{p.quote.text}”</p>
+          <footer class="pr-quote__note">{p.quote.note}</footer>
+        </blockquote>
+      </div>
+    </section>
+  )}
+
+  <section class="pr-cta section-sm bg-stone">
+    <div class="container pr-cta__inner">
+      <div>
+        <span class="eyebrow">Your project</span>
+        <p class="pr-cta__text serif">Planning something similar? <em>Start with a conversation.</em></p>
+      </div>
+      <a class="btn" href="/interior-design/#request">Start a project <Arrow /></a>
+    </div>
+  </section>
+
+  <a class="pr-next on-night" href={`/projects/${next.slug}/`} data-cursor-target="Next">
+    <div class="pr-next__media media"><Img src={next.cover.src} alt="" size="full" /></div>
+    <div class="container pr-next__body">
+      <span class="eyebrow">Next project</span>
+      <span class="pr-next__title serif">{next.title}</span>
+      <span class="link">View project <Arrow /></span>
+    </div>
+  </a>
+
+  <dialog class="lightbox" data-lightbox-dialog aria-label={`${p.title} — image viewer`}>
+    <div class="lightbox__inner">
+      <img data-lightbox-img alt="" />
+      <div class="lightbox__bar">
+        <span data-lightbox-caption></span>
+        <span class="lightbox__count" data-lightbox-count></span>
+        <div class="lightbox__nav">
+          <button type="button" data-lightbox-prev aria-label="Previous image"><Arrow dir="left" /></button>
+          <button type="button" data-lightbox-next aria-label="Next image"><Arrow /></button>
+          <button type="button" data-lightbox-close aria-label="Close viewer">Close</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</Base>
+
+<style>
+  .pr-hero { min-height: 92svh; }
+  .pr-hero__eyebrow { margin-top: 1.5rem; color: rgb(246 239 230 / 0.85); }
+  .pr-hero__title { margin-top: 1rem; max-width: 16ch; color: #f6efe6; }
+
+  .pr-intro__lead { grid-column: 1 / span 7; }
+  .pr-intro__summary { font-size: clamp(1.6rem, 1.1rem + 1.9vw, 3rem); line-height: 1.15; letter-spacing: -0.015em; }
+  .pr-intro__meta { grid-column: 9 / -1; grid-row: 1 / span 2; align-self: start; }
+  .pr-intro__approach { grid-column: 1 / span 7; margin-top: clamp(40px, 5vw, 72px); }
+  .pr-sub { margin-bottom: 1.25rem; }
+  .pr-intro__palette { grid-column: 9 / -1; margin-top: clamp(40px, 5vw, 72px); }
+  .pr-palette { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  @media (max-width: 900px) {
+    .pr-intro__lead, .pr-intro__meta, .pr-intro__approach, .pr-intro__palette { grid-column: 1 / -1; grid-row: auto; }
+    .pr-intro__meta { margin-top: 2.5rem; }
+  }
+
+  .pr-ba__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem 2rem; margin-bottom: 1.75rem; }
+  .pr-ba__head .muted { max-width: 44ch; font-size: var(--fs-sm); }
+  .pr-ba__head em { color: var(--wine); }
+  .pr-ba__grid { display: grid; gap: var(--gutter); }
+  .pr-ba__grid--two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 800px) { .pr-ba__grid--two { grid-template-columns: 1fr; } }
+
+  .gal { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(40px, 5vw, 80px) var(--gutter); }
+  .gal__media { display: block; }
+  .gal__media :global(img) { transition: transform 1.4s var(--ease-expo); }
+  .gal__media:not([data-parallax]):hover :global(img) { transform: scale(1.035); }
+  .g-wide { grid-column: 1 / -1; } .g-wide .gal__media { aspect-ratio: 16 / 9; }
+  .g-tall:nth-child(2) { grid-column: 1 / span 5; } .g-tall:nth-child(3) { grid-column: 7 / span 6; margin-top: 18%; }
+  .g-tall .gal__media { aspect-ratio: 4 / 5; }
+  .g-half:nth-child(5) { grid-column: 1 / span 6; } .g-half:nth-child(6) { grid-column: 7 / span 6; margin-top: 10%; }
+  .g-half .gal__media { aspect-ratio: 4 / 3; }
+  .gal__item:only-child, .gal__item.g-wide:nth-child(4) { grid-column: 2 / span 10; }
+  .g-tall:nth-child(2):last-child { grid-column: 4 / span 6; }
+  .g-half:nth-child(5):last-child { grid-column: 4 / span 6; margin-top: 0; }
+  @media (max-width: 760px) {
+    .gal { grid-template-columns: 1fr; }
+    .gal__item { grid-column: 1 / -1 !important; margin-top: 0 !important; }
+    .g-wide .gal__media { aspect-ratio: 4 / 3; }
+  }
+
+  .pr-quote__text { max-width: 26ch; margin-inline: auto; text-align: center; font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3.6rem); line-height: 1.12; letter-spacing: -0.018em; font-style: italic; color: var(--wine); }
+  .pr-quote__note { margin-top: 1.5rem; font-family: var(--font-sans); font-style: normal; font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+  .pr-cta__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; }
+  .pr-cta__inner > div { display: grid; gap: 1rem; }
+  .pr-cta__text { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.8rem); line-height: 1.1; max-width: 24ch; }
+  .pr-cta__text em { color: var(--wine); }
+
+  .pr-next { position: relative; display: block; min-height: 70vh; overflow: hidden; isolation: isolate; }
+  .pr-next__media { position: absolute; inset: 0; z-index: -1; }
+  .pr-next__media :global(img) { filter: brightness(0.5); transition: transform 1.8s var(--ease-expo), filter 1s; }
+  .pr-next:hover .pr-next__media :global(img) { transform: scale(1.04); filter: brightness(0.42); }
+  .pr-next__body { position: absolute; inset: auto 0 0 0; display: grid; gap: 1.25rem; justify-items: start; padding-bottom: clamp(32px, 6vw, 80px); color: #f6efe6; }
+  .pr-next__body .eyebrow { color: rgb(246 239 230 / 0.82); }
+  .pr-next__title { font-size: clamp(2.4rem, 1.4rem + 4.4vw, 6.4rem); line-height: 0.98; letter-spacing: -0.03em; max-width: 14ch; }
+</style>

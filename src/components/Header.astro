@@ -1,0 +1,193 @@
+---
+import Brand from './Brand.astro';
+import Arrow from './Arrow.astro';
+import { nav, site } from '../data/site';
+
+interface Props {
+  /** `overlay` = transparent with light text over a dark hero */
+  theme?: 'overlay' | 'solid';
+  cta?: { label: string; href: string };
+}
+
+const { theme = 'solid', cta = { label: 'Start a Project', href: '/interior-design/#request' } } = Astro.props;
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="site-header" data-theme={theme} data-header>
+  <div class="site-header__inner container">
+    <Brand class="site-header__brand" />
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul role="list">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="site-nav__link" aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href={cta.href} class="header-cta">
+        <span>{cta.label}</span>
+        <Arrow />
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="menu-toggle__label" data-menu-label>Menu</span>
+        <span class="menu-toggle__lines" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu on-night" id="mobile-menu" data-menu hidden>
+  <div class="mobile-menu__inner container">
+    <nav aria-label="Mobile">
+      <ol role="list" class="mobile-menu__list">
+        <li style="--i:0"><a href="/" aria-current={path === '/' ? 'page' : undefined}><span class="index-num">00</span>Home</a></li>
+        {nav.map((item, i) => (
+          <li style={`--i:${i + 1}`}>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              <span class="index-num">{String(i + 1).padStart(2, '0')}</span>{item.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <div class="mobile-menu__foot">
+      <div class="mobile-menu__ctas">
+        <a class="btn" href="/interior-design/#request">Start a Project <Arrow /></a>
+        <a class="btn btn--ghost" href="/design-school/#apply">Apply / Request Info <Arrow /></a>
+      </div>
+      <div class="mobile-menu__contact">
+        <a href={site.phoneHref}>{site.phone}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <span class="muted">{site.address.street}, {site.address.city}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .site-header {
+    view-transition-name: site-header;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    color: var(--ink);
+    transition: transform 0.7s var(--ease-expo), background-color 0.5s var(--ease-out), color 0.5s var(--ease-out), border-color 0.5s;
+    border-bottom: 1px solid transparent;
+  }
+  .site-header[data-theme='overlay'] { color: var(--on-night); --brand-g: #e0b48f; }
+  .site-header.is-scrolled,
+  .site-header[data-theme='solid'] {
+    background: rgb(244 239 232 / 0.94);
+    color: var(--ink);
+    border-bottom-color: var(--line);
+    --brand-g: var(--wine);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .site-header.is-scrolled, .site-header[data-theme='solid'] { background: rgb(244 239 232 / 0.86); backdrop-filter: saturate(1.2) blur(14px); }
+  }
+  .site-header.is-hidden { transform: translateY(-101%); }
+  .site-header.menu-open { transform: none; background: transparent; color: var(--on-night); border-bottom-color: transparent; backdrop-filter: none; --brand-g: #e0b48f; }
+
+  .site-header__inner {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .site-nav ul { display: flex; gap: clamp(1.25rem, 2.2vw, 2.5rem); }
+  .site-nav__link {
+    position: relative;
+    font-size: 0.8rem;
+    font-weight: 450;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-block: 0.5rem;
+  }
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0.1rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s var(--ease-expo);
+  }
+  .site-nav__link:hover::after, .site-nav__link[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
+
+  .site-header__actions { display: flex; align-items: center; gap: 1rem; }
+  .header-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    height: 44px;
+    padding-inline: 1.15rem;
+    border: 1px solid currentColor;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background-color 0.5s var(--ease-out), color 0.5s var(--ease-out), border-color 0.5s;
+  }
+  .header-cta:hover { background: var(--wine); border-color: var(--wine); color: var(--paper); }
+  .header-cta:hover :global(.arrow) { transform: translateX(3px); }
+
+  .menu-toggle { display: none; align-items: center; gap: 0.75rem; height: 44px; padding-inline: 0.25rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+  .menu-toggle__lines { position: relative; width: 26px; height: 10px; }
+  .menu-toggle__lines span { position: absolute; left: 0; right: 0; height: 1px; background: currentColor; transition: transform 0.6s var(--ease-expo), top 0.6s var(--ease-expo); }
+  .menu-toggle__lines span:first-child { top: 0; }
+  .menu-toggle__lines span:last-child { top: 9px; }
+  .menu-toggle[aria-expanded='true'] .menu-toggle__lines span:first-child { top: 5px; transform: rotate(45deg); }
+  .menu-toggle[aria-expanded='true'] .menu-toggle__lines span:last-child { top: 5px; transform: rotate(-45deg); }
+
+  @media (max-width: 1080px) {
+    .site-nav { display: none; }
+    .menu-toggle { display: inline-flex; }
+  }
+  @media (max-width: 560px) {
+    .header-cta { display: none; }
+  }
+
+  /* mobile menu */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s var(--ease-expo), visibility 0s linear 0.9s;
+    visibility: hidden;
+  }
+  .mobile-menu.is-open { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path 0.9s var(--ease-expo), visibility 0s; }
+  .mobile-menu__inner { min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; padding-top: calc(var(--header-h) + 4vh); padding-bottom: 32px; }
+  .mobile-menu__list { display: grid; gap: 0.2rem; }
+  .mobile-menu__list a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-family: var(--font-serif);
+    font-size: clamp(2.1rem, 9vw, 3.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .mobile-menu__list .index-num { font-size: 0.85rem; letter-spacing: 0.1em; min-width: 2ch; }
+  .mobile-menu__list a[aria-current='page'] { color: #e0b48f; }
+  .mobile-menu__list li { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease-out), transform 0.9s var(--ease-expo); }
+  .mobile-menu.is-open .mobile-menu__list li { opacity: 1; transform: none; transition-delay: calc(0.18s + var(--i) * 0.06s); }
+  .mobile-menu__foot { display: grid; gap: 1.75rem; }
+  .mobile-menu__ctas { display: grid; gap: 0.75rem; }
+  .mobile-menu__contact { display: grid; gap: 0.35rem; font-size: var(--fs-sm); }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu { transition: none; }
+    .mobile-menu__list li { opacity: 1; transform: none; }
+  }
+</style>

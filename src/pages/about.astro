@@ -1,0 +1,223 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Arrow from '../components/Arrow.astro';
+import { site } from '../data/site';
+import { founderSchema, breadcrumbSchema } from '../data/schema';
+
+import portrait from '../assets/people/founder-event.jpg';
+import onSite from '../assets/people/founder-site-visit.jpg';
+import onSiteB from '../assets/people/founder-site-visit-b.jpg';
+import salone from '../assets/people/founder-salone-2026.jpg';
+import saloneColleagues from '../assets/people/founder-salone-colleagues.jpg';
+import door1 from '../assets/travel/doorway-1.jpg';
+import door2 from '../assets/travel/doorway-2.jpg';
+import door3 from '../assets/travel/doorway-3.jpg';
+import facade from '../assets/travel/facade.jpg';
+import workHall from '../assets/projects/burgundy-residence/hall.jpg';
+import classroom from '../assets/school/lesson.jpg';
+
+const quotes = [
+  { text: 'Design must tell the story first. Real comfort — visual and physical — is vital to any place we touch.', note: 'Studio statement' },
+  { text: 'Design is not just a beautiful look — it is the art of creating an environment.', note: 'June 2026 · translated from Armenian' },
+  { text: 'Modern luxury is created not by the number of luxurious things, but by perfect combinations.', note: 'June 2026 · translated from Armenian' },
+];
+
+const timeline = [
+  { year: '2022', items: ['Founds Interior Design Studio & School by JTG in the centre of Yerevan.', 'First public recommendations from clients and students.'] },
+  { year: '2023', items: ['The school’s first graduates complete the course.'] },
+  { year: '2024', items: ['Takes students to Homing Expo in Yerevan and to Dubai INDEX.'] },
+  { year: '2025', items: ['Organises a design tour to Qatar.'] },
+  { year: '2026', items: ['Public talk with NUACA: “AI for interior designers? Artificial intelligence vs. the creative mind.”', 'Salone del Mobile, Milan.', 'New residential, exterior and landscape projects — from a burgundy neoclassical residence to Mediterranean villas and gardens.'] },
+];
+const origin = Astro.site!;
+---
+
+<Base
+  title="Jemma Ter-Grigoryan — Interior Designer & Founder"
+  description="Meet Jemma Ter-Grigoryan, interior designer and founder of Interior Design Studio & School by JTG in Yerevan: her design philosophy, her work, her teaching and her design travels."
+  ogImage={portrait}
+  ogImageAlt="Jemma Ter-Grigoryan, founder of Interior Design Studio & School by JTG"
+  schema={[founderSchema(origin), breadcrumbSchema(origin, [{ name: 'Home', path: '/' }, { name: 'About', path: '/about/' }])]}
+>
+  <section class="ah">
+    <div class="container ah__grid">
+      <div class="ah__portrait">
+        <div class="media ah__img" data-reveal="mask">
+          <Img src={portrait} alt="Jemma Ter-Grigoryan in a black-and-white suit standing beside a table of material samples at a JTG event" size="half" priority position="79% 28%" />
+        </div>
+      </div>
+      <div class="ah__text">
+        <nav class="crumbs crumbs--ink" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">About</span></nav>
+        <p class="eyebrow">Founder · Interior designer</p>
+        <h1 class="display ah__name" data-reveal="lines">
+          <span class="line-mask" style="--i:0"><span>Jemma</span></span>
+          <span class="line-mask" style="--i:1"><span><em>Ter-Grigoryan</em></span></span>
+        </h1>
+        <p class="lead" data-reveal style="--delay:0.4s">Interior designer and founder of Interior Design Studio &amp; School by JTG in Yerevan. She creates interiors, exteriors and landscapes — and leads the school where new designers learn the craft.</p>
+        <div class="ah__links" data-reveal style="--delay:0.5s">
+          <a class="link" href={site.social.founderInstagram.href} target="_blank" rel="noopener">Instagram {site.social.founderInstagram.label} <Arrow dir="up-right" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quotes section on-night" aria-label="Design philosophy">
+    <div class="container">
+      <span class="eyebrow">In her words</span>
+      <ol class="quotes__list" role="list">
+        {quotes.map((q, i) => (
+          <li data-reveal style={`--delay:${i * 0.1}s`}>
+            <span class="index-num">{String(i + 1).padStart(2, '0')}</span>
+            <blockquote>
+              <p class="serif">“{q.text}”</p>
+              <footer>{q.note}</footer>
+            </blockquote>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="roles section">
+    <div class="container">
+      <article class="role">
+        <div class="role__media media" data-parallax><Img src={workHall} alt="Entrance hall in burgundy and stone designed by the studio" size="half" /></div>
+        <div class="role__text">
+          <span class="eyebrow">The designer</span>
+          <h2 class="h2" data-reveal>Story first, <em>comfort always</em></h2>
+          <div class="prose" data-reveal>
+            <p>Jemma’s projects range from apartments, kitchens and bathrooms to cafés, learning centres, villas and gardens. Each begins with mutual understanding — the client’s lifestyle, taste and the specifics of the space — and is created individually.</p>
+            <p>Her language moves between neoclassical warmth and contemporary calm: natural stone, dark timber, concealed light and colour used with precision. Clients describe a designer with “her own signature” and a gift for colour harmony.</p>
+          </div>
+          <a class="link" href="/interior-design/">The studio <Arrow /></a>
+        </div>
+      </article>
+
+      <article class="role role--rev">
+        <div class="role__media media" data-parallax><Img src={classroom} alt="Students in a lesson at the JTG classroom" size="half" position="50% 60%" /></div>
+        <div class="role__text">
+          <span class="eyebrow">The teacher</span>
+          <h2 class="h2" data-reveal>A school built on <em>practice</em></h2>
+          <div class="prose" data-reveal>
+            <p>In 2022 Jemma opened the school alongside the studio, so that students could learn interior design the way it is practised. She leads it with the school’s teachers — small groups, a personal approach and real projects — and presents graduates with their certificates herself.</p>
+            <p>In March 2026 she spoke publicly, together with NUACA, about artificial intelligence and the creative mind in interior design.</p>
+          </div>
+          <a class="link" href="/design-school/">The school <Arrow /></a>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="role__media role__media--pair">
+          <div class="media" data-reveal="mask"><Img src={onSite} alt="Jemma Ter-Grigoryan on a construction site holding a design visualisation" size="third" /></div>
+          <div class="media" data-reveal="mask" style="--delay:0.15s"><Img src={onSiteB} alt="Jemma Ter-Grigoryan reviewing a design board inside an unfinished building" size="third" /></div>
+        </div>
+        <div class="role__text">
+          <span class="eyebrow">On site</span>
+          <h2 class="h2" data-reveal>From visualisation <em>to reality</em></h2>
+          <div class="prose" data-reveal>
+            <p>Design does not end with the visualisation. Jemma takes the concept to site — comparing it with the space as it is being built, so that the finished interior lives up to the image the client approved.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="travel section bg-stone" aria-labelledby="travel-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Inspiration</span>
+          <h2 class="h2" id="travel-title" data-reveal>Seeing design <em>first-hand</em></h2>
+        </div>
+        <div class="section-head__aside"><p class="muted travel__note">From Salone del Mobile in Milan to the doorways of Italian streets — photographs shared by the studio from its 2026 travels.</p></div>
+      </div>
+      <div class="travel__grid">
+        <figure class="tv tv--a"><div class="media" data-reveal="mask"><Img src={salone} alt="Jemma Ter-Grigoryan on the red staircase at Salone del Mobile, Milan" size="third" /></div><figcaption class="caption"><span>Salone del Mobile, Milan</span><span>2026</span></figcaption></figure>
+        <figure class="tv tv--b" data-speed="-0.1"><div class="media" data-reveal="mask"><Img src={door1} alt="Carved timber double door in a stone arch, Italy" size="third" /></div><figcaption class="caption"><span>Italy</span><span>Feb 2026</span></figcaption></figure>
+        <figure class="tv tv--c"><div class="media" data-reveal="mask"><Img src={door2} alt="Arched wooden door with a wrought-iron fanlight, Italy" size="third" /></div><figcaption class="caption"><span>Italy</span><span>Feb 2026</span></figcaption></figure>
+        <figure class="tv tv--d"><div class="media" data-reveal="mask"><Img src={saloneColleagues} alt="Jemma Ter-Grigoryan with a colleague at a bathroom pavilion at Salone del Mobile" size="half" /></div><figcaption class="caption"><span>At a bathroom pavilion, Salone del Mobile</span><span>2026</span></figcaption></figure>
+        <figure class="tv tv--e" data-speed="-0.06"><div class="media" data-reveal="mask"><Img src={door3} alt="Illuminated fanlight above a panelled door at night, Italy" size="third" /></div><figcaption class="caption"><span>Italy</span><span>Feb 2026</span></figcaption></figure>
+        <figure class="tv tv--f"><div class="media" data-reveal="mask"><Img src={facade} alt="Ochre palazzo facade with balconies lit at night, Italy" size="third" /></div><figcaption class="caption"><span>Italy</span><span>Feb 2026</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="tl section" aria-labelledby="tl-title">
+    <div class="container grid-12">
+      <div class="tl__head">
+        <span class="eyebrow">Milestones</span>
+        <h2 class="h2" id="tl-title" data-reveal>Since <em>2022</em></h2>
+        <p class="muted">Recognition: featured by H1, Public Television of Armenia; open class at the Armenian State Pedagogical University.</p>
+      </div>
+      <ol class="tl__list" role="list">
+        {timeline.map((t) => (
+          <li data-reveal>
+            <span class="tl__year serif">{t.year}</span>
+            <ul role="list">{t.items.map((it) => <li>{it}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ah { padding-top: calc(var(--header-h) + clamp(28px, 5vh, 64px)); padding-bottom: clamp(56px, 8vw, 120px); }
+  .ah__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); align-items: end; }
+  .ah__portrait { grid-column: 1 / span 5; }
+  .ah__img { aspect-ratio: 4 / 5; }
+  .ah__text { grid-column: 7 / -1; display: grid; gap: 1.5rem; justify-items: start; padding-bottom: 1rem; }
+  .ah__name { margin-top: 0.25rem; }
+  .ah__name em { color: var(--wine); }
+  @media (max-width: 900px) {
+    .ah__portrait, .ah__text { grid-column: 1 / -1; }
+    .ah__text { order: -1; margin-bottom: 2rem; }
+    .ah__portrait { max-width: 560px; }
+  }
+
+  .quotes__list { display: grid; gap: 0; margin-top: 2.5rem; border-top: 1px solid var(--line-night); }
+  .quotes__list > li { display: grid; grid-template-columns: 4rem 1fr; gap: var(--gutter); padding-block: clamp(28px, 4vw, 56px); border-bottom: 1px solid var(--line-night); }
+  .quotes__list .index-num { padding-top: 0.8rem; }
+  .quotes__list p { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 3.6rem); line-height: 1.1; letter-spacing: -0.018em; max-width: 28ch; }
+  .quotes__list footer { margin-top: 1rem; font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--on-night-muted); }
+
+  .role { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); align-items: center; }
+  .role + .role { margin-top: clamp(96px, 12vw, 200px); }
+  .role__media { grid-column: 1 / span 6; aspect-ratio: 4 / 5; }
+  .role__text { grid-column: 8 / -1; display: grid; gap: 1.5rem; justify-items: start; }
+  .role--rev .role__media { grid-column: 7 / -1; grid-row: 1; }
+  .role--rev .role__text { grid-column: 1 / span 5; grid-row: 1; }
+  .role__media--pair { aspect-ratio: auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+  .role__media--pair .media { aspect-ratio: 3 / 4; }
+  .role__media--pair .media:last-child { margin-top: 22%; }
+  @media (max-width: 900px) {
+    .role__media, .role__text, .role--rev .role__media, .role--rev .role__text { grid-column: 1 / -1; grid-row: auto; }
+    .role__text { margin-top: 1.5rem; }
+  }
+
+  .travel__note { max-width: 40ch; font-size: var(--fs-sm); text-align: right; }
+  @media (max-width: 900px) { .travel__note { text-align: left; } }
+  .travel__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(32px, 4vw, 64px) var(--gutter); }
+  .tv .media { aspect-ratio: 3 / 4; }
+  .tv--a { grid-column: 1 / span 4; }
+  .tv--b { grid-column: 6 / span 3; margin-top: 20%; }
+  .tv--c { grid-column: 10 / span 3; }
+  .tv--d { grid-column: 2 / span 6; } .tv--d .media { aspect-ratio: 4 / 3; }
+  .tv--e { grid-column: 9 / span 3; margin-top: 12%; }
+  .tv--f { grid-column: 4 / span 4; } .tv--f .media { aspect-ratio: 4 / 5; }
+  @media (max-width: 800px) {
+    .travel__grid { grid-template-columns: 1fr 1fr; }
+    .tv { grid-column: auto / span 1 !important; margin-top: 0 !important; }
+    .tv--d { grid-column: 1 / -1 !important; }
+  }
+
+  .tl__head { grid-column: 1 / span 4; display: grid; gap: 1.25rem; align-content: start; }
+  .tl__head .muted { font-size: var(--fs-sm); max-width: 34ch; }
+  .tl__list { grid-column: 6 / -1; border-top: 1px solid var(--line-strong); }
+  .tl__list > li { display: grid; grid-template-columns: 7rem 1fr; gap: var(--gutter); padding-block: 1.6rem; border-bottom: 1px solid var(--line-strong); }
+  .tl__year { font-size: clamp(1.8rem, 1.4rem + 1.4vw, 2.8rem); line-height: 1; color: var(--wine); }
+  .tl__list ul { display: grid; gap: 0.5rem; padding-top: 0.4rem; }
+  @media (max-width: 900px) { .tl__head, .tl__list { grid-column: 1 / -1; } .tl__list { margin-top: 2rem; } }
+  @media (max-width: 520px) { .tl__list > li { grid-template-columns: 1fr; gap: 0.5rem; } }
+</style>

@@ -1,0 +1,523 @@
+---
+import Base from '../layouts/Base.astro';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Img from '../components/Img.astro';
+import Arrow from '../components/Arrow.astro';
+import Testimonials from '../components/Testimonials.astro';
+import SchoolApplicationForm from '../components/SchoolApplicationForm.astro';
+import { software, curriculum, differentiators, enrolmentSteps } from '../data/school';
+import { testimonials } from '../data/testimonials';
+import { site } from '../data/site';
+import { schoolSchema, courseSchema, breadcrumbSchema } from '../data/schema';
+
+import heroLesson from '../assets/school/lesson.jpg';
+import heroCert from '../assets/school/certificates-b.jpg';
+import aboutImg from '../assets/school/graduates-2026-b.jpg';
+import founderImg from '../assets/people/founder-salone-2026.jpg';
+import founderSite from '../assets/people/founder-site-visit-b.jpg';
+import sw1 from '../assets/school/student-living.jpg';
+import sw2 from '../assets/school/student-asya-commercial-2.jpg';
+import sw3 from '../assets/school/student-pavlik.jpg';
+import sw4 from '../assets/school/student-asya-bathroom.jpg';
+import sw5 from '../assets/school/student-playroom.jpg';
+import sw6 from '../assets/school/student-commercial.jpg';
+import sw7 from '../assets/school/student-real-project.jpg';
+import sw8 from '../assets/school/student-asya-commercial-1.jpg';
+import sw9 from '../assets/school/student-lounge.jpg';
+import sw10 from '../assets/school/student-asya-bathroom-b.jpg';
+import sw11 from '../assets/school/student-asya-commercial-3.jpg';
+import sw12 from '../assets/school/student-playroom-b.jpg';
+import tour1 from '../assets/school/salone-1.jpg';
+import tour2 from '../assets/school/salone-2.jpg';
+import tour3 from '../assets/school/salone-3.jpg';
+import tour4 from '../assets/school/salone-4.jpg';
+import expoGroup from '../assets/school/expo-group.jpg';
+import expoMaterials from '../assets/school/expo-materials.jpg';
+import expoSamples from '../assets/school/expo-samples.jpg';
+import outcomeImg from '../assets/school/certificates.jpg';
+
+const studentWork = [
+  { src: sw1, alt: 'Student project: open living and dining room with olive sofa, timber kitchen and neoclassical wall mouldings', caption: 'Living & dining — contemporary with neoclassical details', when: 'August 2026', cls: 'w-a' },
+  { src: sw2, alt: 'Student project: children’s activity space with glazed partition, play equipment and murals', caption: 'Asya — commercial interior, real project', when: 'June 2026', cls: 'w-b' },
+  { src: sw3, alt: 'Student project: living room with olive sofa and city view', caption: 'Pavlik — residential interior', when: 'August 2026', cls: 'w-c' },
+  { src: sw4, alt: 'Student project: bathroom with deep blue tiles, terrazzo floor and timber vanity', caption: 'Asya — bathroom', when: 'May 2026', cls: 'w-d' },
+  { src: sw5, alt: 'Student project: children’s playroom with arched shelving, tree motif and floor cushions', caption: 'Children’s playroom', when: 'May 2026', cls: 'w-e' },
+  { src: sw6, alt: 'Student project: bright waiting lounge with black steel glazing and botanical wall motifs', caption: 'Commercial space on Alek Manukyan St.', when: 'May 2026', cls: 'w-f' },
+  { src: sw7, alt: 'Student project: treatment room with hot-air-balloon mural', caption: 'Real project by a student', when: 'July 2026', cls: 'w-g' },
+  { src: sw9, alt: 'Student project: lounge with mustard cushions and botanical wall art', caption: 'Student lounge design', when: 'May 2026', cls: 'w-h' },
+];
+const moreWork = [
+  { src: sw8, alt: 'Student project: gym corner with treadmill and soft play elements', caption: 'Asya — commercial interior' },
+  { src: sw10, alt: 'Student project: blue bathroom detail with terrazzo basin', caption: 'Asya — bathroom detail' },
+  { src: sw11, alt: 'Student project: activity room with climbing wall and soft flooring', caption: 'Asya — activity room' },
+  { src: sw12, alt: 'Student project: playroom reading corner with animal shelves', caption: 'Playroom detail' },
+];
+
+const large = async (src: ImageMetadata) => (await getImage({ src, width: Math.min(src.width, 1800), format: 'webp', quality: 80 })).src;
+const workLarge = await Promise.all(studentWork.map((w) => large(w.src)));
+const moreLarge = await Promise.all(moreWork.map((w) => large(w.src)));
+
+const studentQuotes = testimonials.filter((t) => t.audience === 'student');
+const origin = Astro.site!;
+---
+
+<Base
+  title="Interior Design School in Yerevan — Courses in 3ds Max, Corona, Photoshop & ArchiCAD"
+  description="Interior Design School by JTG in Yerevan: practical interior design courses taught inside a working studio — 3ds Max, Corona Renderer, Photoshop and ArchiCAD / Revit. Small groups, in person or online, in Armenian or English. Request tuition information."
+  ogImage={heroLesson}
+  ogImageAlt="Students in the JTG classroom in Yerevan"
+  cta={{ label: 'Apply / Request Info', href: '/design-school/#apply' }}
+  schema={[schoolSchema(origin), courseSchema(origin), breadcrumbSchema(origin, [{ name: 'Home', path: '/' }, { name: 'Design School', path: '/design-school/' }])]}
+>
+  <!-- HERO -->
+  <section class="sh">
+    <div class="container sh__grid">
+      <div class="sh__text">
+        <nav class="crumbs crumbs--ink" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Design School</span></nav>
+        <p class="eyebrow sh__eyebrow">Interior Design School by JTG · Yerevan &amp; online</p>
+        <h1 class="display sh__title" data-reveal="lines">
+          <span class="line-mask" style="--i:0"><span>Learn interior</span></span>
+          <span class="line-mask" style="--i:1"><span>design from a</span></span>
+          <span class="line-mask" style="--i:2"><span><em>working studio.</em></span></span>
+        </h1>
+        <p class="lead sh__lead" data-reveal style="--delay:0.45s">Practical courses in 3ds Max, Corona Renderer, Photoshop and ArchiCAD / Revit — taught in small groups inside a working design studio, through to your own portfolio and certificate.</p>
+        <div class="sh__ctas" data-reveal style="--delay:0.55s">
+          <a class="btn" href="#apply">Apply / request information <Arrow /></a>
+          <a class="btn btn--ghost" href="#programme">See the programme <Arrow /></a>
+        </div>
+        <dl class="sh__facts" data-reveal style="--delay:0.65s">
+          <div><dt>Format</dt><dd>In person · Online</dd></div>
+          <div><dt>Language</dt><dd>Armenian · English</dd></div>
+          <div><dt>Groups</dt><dd>Small, personal</dd></div>
+          <div><dt>Finish with</dt><dd>Portfolio &amp; certificate</dd></div>
+        </dl>
+      </div>
+      <div class="sh__visual">
+        <div class="sh__main media" data-reveal="mask">
+          <Img src={heroLesson} alt="Students working on laptops around the classroom table at JTG, 3ds Max on the screen and the JTG logo on the wall" size="half" sizes="(min-width: 1000px) 36vw, (min-width: 700px) 550px, 86vw" priority position="50% 60%" />
+        </div>
+        <div class="sh__second media" data-reveal="mask" style="--delay:0.25s" data-speed="-0.1">
+          <Img src={heroCert} alt="Jemma Ter-Grigoryan presenting a certificate to a graduate" size="third" sizes="(min-width: 1000px) 18vw, (min-width: 700px) 300px, 46vw" position="50% 35%" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-school section">
+    <div class="container grid-12">
+      <div class="as__label"><span class="eyebrow">About the school</span></div>
+      <div class="as__body">
+        <p class="as__statement serif" data-reveal>The school opened in 2022 alongside the studio, in the centre of Yerevan. Its idea is simple: learn interior design <em>the way it is practised</em> — on real tools, real projects and real materials.</p>
+        <div class="as__cols">
+          <div class="prose" data-reveal>
+            <p>The key to the school, as to the studio, is mutual understanding and an individual approach to every student. Groups are small, lessons are practice-heavy, and teachers give each student personal attention — which is why graduates so often describe it as “a big family”.</p>
+            <p>Lessons are taught in person at Koryun St. 21 and online, in Armenian or English, so the school is open to students outside Armenia too.</p>
+          </div>
+          <figure class="as__img">
+            <div class="media" data-reveal="mask"><Img src={aboutImg} alt="A group of graduates with their certificates" size="third" position="50% 40%" /></div>
+            <figcaption class="caption"><span>Graduates, March 2026</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why section bg-stone" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Why study here</span>
+          <h2 class="h2" id="why-title" data-reveal>Six reasons students <em>choose JTG</em></h2>
+        </div>
+      </div>
+      <ol class="why__grid" role="list">
+        {differentiators.map((d, i) => (
+          <li class="why__item" data-reveal style={`--delay:${(i % 3) * 0.08}s`}>
+            <span class="index-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="why__title">{d.title}</h3>
+            <p>{d.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- PROGRAMME -->
+  <section class="prog section" id="programme" aria-labelledby="prog-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Current programme</span>
+          <h2 class="h2" id="prog-title" data-reveal>The interior design <em>course</em></h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="muted prog__note">Four professional tools, taught as one workflow — from measured drawing to finished visualisation.</p>
+        </div>
+      </div>
+      <div class="prog__grid">
+        {software.map((s, i) => (
+          <article class="prog__card" data-reveal style={`--delay:${i * 0.08}s`}>
+            <span class="prog__role">{String(i + 1).padStart(2, '0')} · {s.role}</span>
+            <h3 class="prog__name">{s.name}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="curr">
+        <div class="curr__head">
+          <h3 class="h3" data-reveal>What you will <em>learn</em></h3>
+          <p class="muted">Topics drawn from the school’s published lessons. The exact sequence and duration are confirmed when you enquire.</p>
+        </div>
+        <ol class="curr__list" role="list">
+          {curriculum.map((c, i) => (
+            <li data-reveal style={`--delay:${(i % 2) * 0.06}s`}>
+              <span class="index-num">{String(i + 1).padStart(2, '0')}</span>
+              <div><h4 class="curr__title">{c.title}</h4><p class="muted">{c.text}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER / INSTRUCTOR -->
+  <section class="fi section on-night">
+    <div class="container grid-12">
+      <div class="fi__media">
+        <div class="fi__main media" data-parallax><Img src={founderImg} alt="Jemma Ter-Grigoryan at Salone del Mobile in Milan, 2026" size="half" position="50% 35%" /></div>
+        <div class="fi__second media" data-speed="-0.1"><Img src={founderSite} alt="Jemma Ter-Grigoryan on a construction site with a design board" size="third" /></div>
+      </div>
+      <div class="fi__text">
+        <span class="eyebrow">Founder &amp; school director</span>
+        <h2 class="h2" data-reveal>Led by <em>Jemma Ter-Grigoryan</em></h2>
+        <p class="lead" data-reveal>The school is led by the designer behind the studio’s own projects — so what students learn is connected directly to professional practice.</p>
+        <div class="prose" data-reveal>
+          <p>Jemma works alongside the school’s teachers, presents graduates with their certificates, and takes students beyond the classroom: to showrooms and expos in Yerevan, and on international design tours to see new materials, products and trends first-hand.</p>
+          <p>In March 2026 she gave a public talk with NUACA, the National University of Architecture and Construction of Armenia, on artificial intelligence and the creative mind in interior design.</p>
+        </div>
+        <a class="link" href="/about/">About Jemma <Arrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT WORK -->
+  <section class="sw section" aria-labelledby="sw-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Student work · 2026</span>
+          <h2 class="h2" id="sw-title" data-reveal>Designed by our <em>students</em></h2>
+        </div>
+        <div class="section-head__aside"><p class="muted sw__note">Visualisations by current students and graduates, as published by the school. Several are real projects for real clients.</p></div>
+      </div>
+      <div class="sw__grid">
+        {studentWork.map((w, i) => (
+          <figure class:list={['sw__item', w.cls]}>
+            <a class="media sw__media" href={workLarge[i]} data-lightbox data-alt={w.alt} data-caption={`${w.caption} · ${w.when}`} data-cursor-target="Enlarge" data-reveal="mask">
+              <Img src={w.src} alt={w.alt} size="third" />
+            </a>
+            <figcaption class="caption"><span>{w.caption}</span><span>{w.when}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <ul class="sw__more" role="list">
+        {moreWork.map((w, i) => (
+          <li>
+            <a class="media" href={moreLarge[i]} data-lightbox data-alt={w.alt} data-caption={w.caption} data-cursor-target="Enlarge"><Img src={w.src} alt={w.alt} size="thumb" /></a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- BEYOND THE CLASSROOM -->
+  <section class="tours section bg-stone" aria-labelledby="tours-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Beyond the classroom</span>
+          <h2 class="h2" id="tours-title" data-reveal>Expos, showrooms &amp; <em>design tours</em></h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="muted tours__note">“We want our students not only to learn interior design, but to see and feel world design in a real environment.”</p>
+        </div>
+      </div>
+      <div class="tours__grid">
+        <div class="tours__text">
+          <ul class="tours__list" role="list">
+            <li data-reveal><span class="tours__when">April 2026</span><span class="tours__what serif">Salone del Mobile, Milan</span><span class="muted">The world’s leading furniture and design fair — bathroom pavilions, materials and new collections.</span></li>
+            <li data-reveal><span class="tours__when">May 2026</span><span class="tours__what serif">Construction expo, Yerevan</span><span class="muted">Students meet manufacturers of finishes, paints and building products.</span></li>
+            <li data-reveal><span class="tours__when">October 2025</span><span class="tours__what serif">Design tour to Qatar</span><span class="muted">An international study trip open to students of the school.</span></li>
+            <li data-reveal><span class="tours__when">2024</span><span class="tours__what serif">Dubai INDEX &amp; Homing Expo Yerevan</span><span class="muted">Trade-fair visits combining business meetings and inspiration.</span></li>
+            <li data-reveal><span class="tours__when">Ongoing</span><span class="tours__what serif">Open lessons in showrooms</span><span class="muted">Practical classes hosted by partner tile, lighting and door showrooms.</span></li>
+          </ul>
+        </div>
+        <div class="tours__gallery">
+          <figure class="tg tg--a"><div class="media" data-reveal="mask"><Img src={tour1} alt="Illuminated glass-block washbasins at a Salone del Mobile bathroom pavilion" size="third" /></div></figure>
+          <figure class="tg tg--b" data-speed="-0.08"><div class="media" data-reveal="mask" style="--delay:0.1s"><Img src={tour4} alt="Carved timber bathtub on display at Salone del Mobile" size="third" /></div></figure>
+          <figure class="tg tg--c"><div class="media" data-reveal="mask" style="--delay:0.2s"><Img src={expoGroup} alt="Students with the founder at a construction expo in Yerevan" size="half" /></div></figure>
+          <figure class="tg tg--d"><div class="media" data-reveal="mask"><Img src={expoMaterials} alt="Student examining a wall of paint colour samples at an expo" size="third" /></div></figure>
+          <figure class="tg tg--e" data-speed="-0.06"><div class="media" data-reveal="mask" style="--delay:0.1s"><Img src={tour2} alt="Marble-clad bathroom installation at Salone del Mobile" size="third" /></div></figure>
+          <figure class="tg tg--f"><div class="media" data-reveal="mask" style="--delay:0.2s"><Img src={expoSamples} alt="Students looking at material samples at an exhibition stand" size="third" /></div></figure>
+          <figure class="tg tg--g"><div class="media" data-reveal="mask"><Img src={tour3} alt="Freestanding bath in a warm brown pavilion at Salone del Mobile" size="third" /></div></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="out section" aria-labelledby="out-title">
+    <div class="container grid-12">
+      <div class="out__img">
+        <div class="media" data-reveal="mask"><Img src={outcomeImg} alt="A graduate and Jemma Ter-Grigoryan holding certificates in front of the JTG logo" size="third" position="50% 35%" /></div>
+      </div>
+      <div class="out__text">
+        <span class="eyebrow">Outcomes</span>
+        <h2 class="h2" id="out-title" data-reveal>What you leave <em>with</em></h2>
+        <ul class="out__list" role="list">
+          <li data-reveal>A portfolio of your own projects, presented in photorealistic visualisations.</li>
+          <li data-reveal>A certificate from Interior Design School by JTG.</li>
+          <li data-reveal>Working command of 3ds Max, Corona Renderer, Photoshop and ArchiCAD / Revit.</li>
+          <li data-reveal>The practical habits of a designer: measuring a space, planning it, choosing materials and presenting options.</li>
+          <li data-reveal>Contacts and a community — teachers, fellow students and the studio’s network of showrooms.</li>
+        </ul>
+        <p class="muted out__honest">Several graduates already work as designers and some students complete real projects during the course. Results depend on each student’s effort and goals — the school will talk through what is realistic for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials items={studentQuotes} title="Students on the school" eyebrow="Student voices" dark />
+
+  <!-- ENROL -->
+  <section class="enrol section" aria-labelledby="enrol-title">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Admissions</span>
+          <h2 class="h2" id="enrol-title" data-reveal>How to <em>enrol</em></h2>
+        </div>
+      </div>
+      <ol class="enrol__steps" role="list">
+        {enrolmentSteps.map((s, i) => (
+          <li data-reveal style={`--delay:${i * 0.08}s`}>
+            <span class="enrol__num serif">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="enrol__title">{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="tuition" data-reveal>
+        <div>
+          <span class="eyebrow">Tuition</span>
+          <p class="tuition__text serif">Tuition depends on the course and format and is shared personally for the next available group.</p>
+        </div>
+        <a class="btn" href="#apply">Request tuition information <Arrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="apply section bg-stone" id="apply" aria-labelledby="apply-title">
+    <div class="container grid-12">
+      <aside class="apply__intro">
+        <div class="apply__sticky">
+          <span class="eyebrow">Apply / enquire</span>
+          <h2 class="h2" id="apply-title">Join the next <em>group</em></h2>
+          <p class="lead">Apply, ask about tuition, or request course details and the schedule — one short form for all of it.</p>
+          <div class="apply__direct">
+            <p class="muted">Speak with the school</p>
+            <a href={site.phoneHref} class="apply__phone serif">{site.phone}</a>
+            <a href={site.social.schoolInstagram.href} target="_blank" rel="noopener" class="apply__ig">Instagram {site.social.schoolInstagram.label}</a>
+            <span class="muted apply__addr">{site.address.street}, {site.address.city}</span>
+          </div>
+        </div>
+      </aside>
+      <div class="apply__form">
+        <SchoolApplicationForm />
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" data-lightbox-dialog aria-label="Student work viewer">
+    <div class="lightbox__inner">
+      <img data-lightbox-img alt="" />
+      <div class="lightbox__bar">
+        <span data-lightbox-caption></span>
+        <span class="lightbox__count" data-lightbox-count></span>
+        <div class="lightbox__nav">
+          <button type="button" data-lightbox-prev aria-label="Previous image"><Arrow dir="left" /></button>
+          <button type="button" data-lightbox-next aria-label="Next image"><Arrow /></button>
+          <button type="button" data-lightbox-close aria-label="Close viewer">Close</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</Base>
+
+<style>
+  /* HERO */
+  .sh { padding-top: calc(var(--header-h) + clamp(32px, 6vh, 72px)); padding-bottom: clamp(56px, 8vw, 120px); }
+  .sh__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); align-items: end; }
+  .sh__text { grid-column: 1 / span 7; display: grid; gap: 1.5rem; justify-items: start; }
+  .sh__eyebrow { margin-top: 1rem; }
+  .sh__title { max-width: 11ch; }
+  .sh__lead { max-width: 46ch; }
+  .sh__ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .sh__facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); width: 100%; margin-top: 1rem; }
+  .sh__facts div { border-top: 1px solid var(--line-strong); padding-top: 0.8rem; }
+  .sh__facts dt { font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .sh__facts dd { font-family: var(--font-serif); font-size: 1.1rem; margin-top: 0.3rem; line-height: 1.3; }
+  .sh__visual { grid-column: 8 / -1; position: relative; padding-bottom: 18%; }
+  .sh__main { aspect-ratio: 3 / 4; width: 86%; margin-left: auto; }
+  .sh__second { position: absolute; left: 0; bottom: 0; width: 46%; aspect-ratio: 4 / 5; border: 10px solid var(--paper); }
+  :global(.crumbs--ink) { color: var(--muted) !important; }
+  :global(.crumbs--ink) a:hover { color: var(--ink) !important; }
+  @media (max-width: 1000px) {
+    .sh__text, .sh__visual { grid-column: 1 / -1; }
+    .sh__visual { margin-top: 2.5rem; max-width: 640px; }
+    .sh__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.25rem; }
+  }
+
+  /* ABOUT */
+  .as__label { grid-column: 1 / span 3; padding-top: 1rem; }
+  .as__body { grid-column: 4 / -1; }
+  .as__statement { font-size: clamp(1.7rem, 1.1rem + 2.3vw, 3.5rem); line-height: 1.14; letter-spacing: -0.018em; }
+  .as__statement em { color: var(--wine); }
+  .as__cols { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 5vw, 96px); margin-top: clamp(40px, 5vw, 80px); align-items: start; }
+  .as__img .media { aspect-ratio: 4 / 5; }
+  @media (max-width: 900px) {
+    .as__label, .as__body { grid-column: 1 / -1; }
+    .as__label { margin-bottom: 1.5rem; }
+    .as__cols { grid-template-columns: 1fr; }
+  }
+
+  /* WHY */
+  .why__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 var(--gutter); border-top: 1px solid var(--line-strong); }
+  .why__item { display: grid; gap: 0.9rem; align-content: start; padding: clamp(28px, 3vw, 44px) clamp(0px, 1.5vw, 24px) clamp(28px, 3vw, 44px) 0; border-bottom: 1px solid var(--line-strong); }
+  .why__title { font-size: clamp(1.4rem, 1.15rem + 0.9vw, 2rem); line-height: 1.12; }
+  .why__item p { color: var(--ink-2); }
+  @media (max-width: 900px) { .why__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .why__grid { grid-template-columns: 1fr; } }
+
+  /* PROGRAMME */
+  .prog__note { max-width: 34ch; font-size: var(--fs-sm); text-align: right; }
+  .prog__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+  .prog__card {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    min-height: 330px;
+    padding: clamp(22px, 2vw, 32px);
+    background: var(--night);
+    color: var(--on-night);
+    transition: transform 0.8s var(--ease-expo), background-color 0.6s;
+  }
+  .prog__card:hover { transform: translateY(-6px); background: var(--wine); }
+  .prog__role { font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--on-night-muted); }
+  .prog__card:hover .prog__role { color: var(--on-night); }
+  .prog__name { font-size: clamp(1.8rem, 1.3rem + 1.6vw, 3rem); line-height: 1; margin-top: auto; padding-top: 3rem; }
+  .prog__card p { color: rgb(239 232 222 / 0.82); font-size: var(--fs-sm); }
+  @media (max-width: 1100px) { .prog__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .prog__grid { grid-template-columns: 1fr; } .prog__card { min-height: 0; } .prog__name { padding-top: 1rem; } }
+  @media (max-width: 900px) { .prog__note { text-align: left; } }
+
+  .curr { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); margin-top: clamp(72px, 9vw, 140px); }
+  .curr__head { grid-column: 1 / span 4; display: grid; gap: 1rem; align-content: start; }
+  .curr__list { grid-column: 6 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--gutter); }
+  .curr__list li { display: flex; gap: 1rem; padding-block: 1.25rem; border-top: 1px solid var(--line); }
+  .curr__title { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.25; margin-bottom: 0.35rem; }
+  .curr__list p { font-size: var(--fs-sm); }
+  @media (max-width: 1000px) { .curr__head, .curr__list { grid-column: 1 / -1; } }
+  @media (max-width: 600px) { .curr__list { grid-template-columns: 1fr; } }
+
+  /* FOUNDER */
+  .fi__media { grid-column: 1 / span 6; position: relative; padding-bottom: 14%; }
+  .fi__main { aspect-ratio: 4 / 5; width: 80%; }
+  .fi__second { position: absolute; right: 0; bottom: 0; width: 40%; aspect-ratio: 1; border: 10px solid var(--night); }
+  .fi__text { grid-column: 8 / -1; align-self: center; display: grid; gap: 1.5rem; justify-items: start; }
+  @media (max-width: 900px) { .fi__media, .fi__text { grid-column: 1 / -1; } .fi__text { margin-top: 3rem; } }
+
+  /* STUDENT WORK */
+  .sw__note { max-width: 36ch; font-size: var(--fs-sm); text-align: right; }
+  @media (max-width: 900px) { .sw__note { text-align: left; } }
+  .sw__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(36px, 4vw, 64px) var(--gutter); }
+  .sw__media { display: block; }
+  .sw__media :global(img) { transition: transform 1.4s var(--ease-expo); }
+  .sw__media:hover :global(img) { transform: scale(1.04); }
+  .w-a { grid-column: 1 / span 7; } .w-a .media { aspect-ratio: 3 / 2; }
+  .w-b { grid-column: 9 / span 4; margin-top: 14%; } .w-b .media { aspect-ratio: 4 / 5; }
+  .w-c { grid-column: 2 / span 4; } .w-c .media { aspect-ratio: 4 / 5; }
+  .w-d { grid-column: 7 / span 5; margin-top: 8%; } .w-d .media { aspect-ratio: 4 / 5; }
+  .w-e { grid-column: 1 / span 6; } .w-e .media { aspect-ratio: 3 / 2; }
+  .w-f { grid-column: 8 / span 5; margin-top: 10%; } .w-f .media { aspect-ratio: 1; }
+  .w-g { grid-column: 2 / span 5; } .w-g .media { aspect-ratio: 3 / 2; }
+  .w-h { grid-column: 8 / span 4; } .w-h .media { aspect-ratio: 4 / 5; }
+  .sw__more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); margin-top: clamp(48px, 6vw, 96px); }
+  .sw__more .media { display: block; aspect-ratio: 1; }
+  @media (max-width: 800px) {
+    .sw__grid { grid-template-columns: 1fr 1fr; }
+    .sw__grid .sw__item { grid-column: auto / span 1 !important; margin-top: 0 !important; }
+    .sw__grid .w-a, .sw__grid .w-e { grid-column: 1 / -1 !important; }
+    .sw__more { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* TOURS */
+  .tours__note { max-width: 40ch; font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; line-height: 1.4; text-align: right; color: var(--wine) !important; }
+  @media (max-width: 900px) { .tours__note { text-align: left; } }
+  .tours__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); }
+  .tours__text { grid-column: 1 / span 4; }
+  .tours__list li { display: grid; gap: 0.35rem; padding-block: 1.25rem; border-top: 1px solid var(--line-strong); }
+  .tours__list li:last-child { border-bottom: 1px solid var(--line-strong); }
+  .tours__when { font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); }
+  .tours__what { font-size: 1.35rem; line-height: 1.2; }
+  .tours__list .muted { font-size: var(--fs-sm); }
+  .tours__gallery { grid-column: 6 / -1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--gutter); align-content: start; }
+  .tg .media { aspect-ratio: 3 / 4; }
+  .tg--a { grid-column: 1 / span 2; } .tg--b { grid-column: 3 / span 2; margin-top: 30%; } .tg--d { grid-column: 5 / span 2; }
+  .tg--c { grid-column: 1 / span 4; } .tg--c .media { aspect-ratio: 3 / 2; }
+  .tg--e { grid-column: 5 / span 2; } .tg--f { grid-column: 1 / span 3; } .tg--f .media { aspect-ratio: 4 / 3; }
+  .tg--g { grid-column: 4 / span 3; } .tg--g .media { aspect-ratio: 4 / 3; }
+  @media (max-width: 1000px) { .tours__text, .tours__gallery { grid-column: 1 / -1; } .tours__gallery { margin-top: 2.5rem; } }
+  @media (max-width: 600px) {
+    .tours__gallery { grid-template-columns: 1fr 1fr; }
+    .tours__gallery .tg { grid-column: auto / span 1 !important; margin-top: 0 !important; }
+    .tours__gallery .tg--c { grid-column: 1 / -1 !important; }
+  }
+
+  /* OUTCOMES */
+  .out__img { grid-column: 1 / span 4; }
+  .out__img .media { aspect-ratio: 9 / 14; }
+  .out__text { grid-column: 6 / -1; align-self: center; display: grid; gap: 1.5rem; }
+  .out__list { border-top: 1px solid var(--line-strong); }
+  .out__list li { position: relative; padding: 1.1rem 0 1.1rem 2.2rem; border-bottom: 1px solid var(--line-strong); font-size: var(--fs-lead); line-height: 1.45; }
+  .out__list li::before { content: ''; position: absolute; left: 0; top: 1.75rem; width: 1.2rem; height: 1px; background: var(--wine); }
+  .out__honest { font-size: var(--fs-sm); max-width: 62ch; }
+  @media (max-width: 900px) { .out__img, .out__text { grid-column: 1 / -1; } .out__img { max-width: 420px; margin-bottom: 2.5rem; } }
+
+  /* ENROL */
+  .enrol__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+  .enrol__steps li { display: grid; gap: 0.8rem; align-content: start; border-top: 1px solid var(--ink); padding-top: 1.5rem; }
+  .enrol__num { font-size: clamp(2.6rem, 2rem + 2vw, 4.4rem); line-height: 1; color: var(--wine); }
+  .enrol__title { font-size: clamp(1.35rem, 1.15rem + 0.7vw, 1.9rem); }
+  @media (max-width: 800px) { .enrol__steps { grid-template-columns: 1fr; row-gap: 2.5rem; } }
+  .tuition { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; margin-top: clamp(56px, 7vw, 100px); padding: clamp(28px, 4vw, 56px); background: var(--paper-2); border: 1px solid var(--line); }
+  .tuition > div { display: grid; gap: 1rem; max-width: 52ch; }
+  .tuition__text { font-size: clamp(1.3rem, 1.1rem + 0.8vw, 2rem); line-height: 1.25; }
+
+  /* APPLY */
+  .apply__intro { grid-column: 1 / span 4; }
+  .apply__sticky { position: sticky; top: calc(var(--header-h) + 32px); display: grid; gap: 1.5rem; }
+  .apply__direct { display: grid; gap: 0.3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .apply__phone { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.2; }
+  .apply__ig { font-size: var(--fs-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }
+  .apply__addr { font-size: var(--fs-sm); }
+  .apply__form { grid-column: 6 / -1; }
+  @media (max-width: 1000px) {
+    .apply__intro, .apply__form { grid-column: 1 / -1; }
+    .apply__sticky { position: static; margin-bottom: 3rem; }
+  }
+</style>

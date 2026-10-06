@@ -1,0 +1,14 @@
+---
+interface Props { title: string; text: string }
+const { title, text } = Astro.props;
+---
+
+<div class="form-success" data-form-success aria-live="polite">
+  <svg class="form-success__mark" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+    <circle cx="28" cy="28" r="27" stroke="currentColor" stroke-width="1" />
+    <path d="M17 29l7 7 15-16" stroke="currentColor" stroke-width="1.4" />
+  </svg>
+  <h3 class="serif" tabindex="-1" data-success-title>{title}</h3>
+  <p class="lead">{text}</p>
+  <p class="muted">If your request is urgent, call <a href="tel:+37498722727">+374 98 722727</a>.</p>
+</div>

@@ -1,0 +1,100 @@
+---
+import type { Testimonial } from '../data/testimonials';
+import { reviewSummary } from '../data/testimonials';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  items: Testimonial[];
+  title?: string;
+  eyebrow?: string;
+  dark?: boolean;
+}
+const { items, title = 'In their words', eyebrow = 'Testimonials', dark = false } = Astro.props;
+const uid = `tm-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<section class:list={['tm section', { 'on-night': dark }]} aria-labelledby={uid} data-carousel>
+  <div class="container">
+    <div class="tm__head">
+      <div>
+        <span class="eyebrow">{eyebrow}</span>
+        <h2 id={uid} class="h2 tm__title" data-reveal>{title}</h2>
+      </div>
+      <div class="tm__aside">
+        <a class="tm__rating" href={reviewSummary.href} target="_blank" rel="noopener">
+          <span class="tm__rating-big serif">{reviewSummary.label}</span>
+          <span class="tm__rating-small">{reviewSummary.detail}</span>
+        </a>
+        <div class="tm__nav">
+          <button type="button" class="tm__btn" data-carousel-prev aria-label="Previous testimonial"><Arrow dir="left" /></button>
+          <span class="tm__count" aria-hidden="true"><span data-carousel-current>01</span> / {String(items.length).padStart(2, '0')}</span>
+          <button type="button" class="tm__btn" data-carousel-next aria-label="Next testimonial"><Arrow /></button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="tm__track" role="list" data-carousel-track tabindex="0" aria-label="Testimonials, scroll horizontally">
+      {items.map((t) => (
+        <li class="tm__item" data-carousel-item>
+          <figure>
+            <svg class="tm__mark" viewBox="0 0 40 30" aria-hidden="true"><path d="M0 30V17C0 7 5 1.5 15 0l1.5 3.4C10.6 5.2 8 8.6 8 13.5h7V30H0Zm23 0V17C23 7 28 1.5 38 0l1.5 3.4c-5.9 1.8-8.5 5.2-8.5 10.1h7V30H23Z" fill="currentColor"/></svg>
+            <blockquote class="tm__quote">
+              <p>{t.quote}</p>
+            </blockquote>
+            <figcaption class="tm__cite">
+              <span class="tm__name">{t.name}</span>
+              <span class="tm__role">{t.role} · {t.date}{t.translated ? ` · ${t.translated}` : ''}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+    <p class="tm__source muted">Public recommendations from the studio’s Facebook page.</p>
+  </div>
+</section>
+
+<style>
+  .tm__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: clamp(40px, 5vw, 72px); }
+  .tm__title { margin-top: 1.4rem; }
+  .tm__aside { display: flex; flex-wrap: wrap; align-items: flex-end; gap: clamp(1.5rem, 4vw, 4rem); }
+  .tm__rating { display: grid; gap: 0.2rem; }
+  .tm__rating-big { font-family: var(--font-sans); font-weight: 300; letter-spacing: -0.01em; font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.4rem); line-height: 1; }
+  .tm__rating-small { font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .on-night .tm__rating-small { color: var(--on-night-muted); }
+  .tm__nav { display: flex; align-items: center; gap: 1rem; }
+  .tm__btn {
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s;
+  }
+  .on-night .tm__btn { border-color: var(--line-night); }
+  .tm__btn:hover { background: var(--wine); border-color: var(--wine); color: var(--paper); }
+  .tm__btn[disabled] { opacity: 0.35; pointer-events: none; }
+  .tm__count { font-size: var(--fs-xs); letter-spacing: 0.16em; min-width: 5.5ch; text-align: center; }
+
+  .tm__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(78%, 620px);
+    gap: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .tm__track::-webkit-scrollbar { display: none; }
+  .tm__item { scroll-snap-align: start; border-top: 1px solid var(--line-strong); padding-top: 2rem; }
+  .on-night .tm__item { border-color: var(--line-night); }
+  .tm__mark { width: 30px; color: var(--wine); margin-bottom: 1.5rem; }
+  .on-night .tm__mark { color: #d9b38c; }
+  .tm__quote p { font-family: var(--font-serif); font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.8rem); line-height: 1.32; letter-spacing: -0.005em; }
+  .tm__cite { display: grid; gap: 0.25rem; margin-top: 1.75rem; }
+  .tm__name { font-weight: 500; letter-spacing: 0.04em; }
+  .tm__role { font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .on-night .tm__role { color: var(--on-night-muted); }
+  .tm__source { margin-top: 2rem; font-size: var(--fs-xs); letter-spacing: 0.08em; }
+  @media (max-width: 700px) { .tm__track { grid-auto-columns: 88%; } }
+</style>

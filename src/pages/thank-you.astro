@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Thank you"
+  description="Your message has been sent to Interior Design Studio & School by JTG."
+  noindex
+>
+  <section class="ty">
+    <div class="container ty__inner">
+      <svg class="ty__mark" viewBox="0 0 56 56" fill="none" aria-hidden="true"><circle cx="28" cy="28" r="27" stroke="currentColor" stroke-width="1" /><path d="M17 29l7 7 15-16" stroke="currentColor" stroke-width="1.4" /></svg>
+      <h1 class="h1">Thank you — your message <em>has been sent.</em></h1>
+      <p class="lead" data-ty-text>The studio will review it and contact you shortly. If your request is urgent, call <a href={site.phoneHref}>{site.phone}</a>.</p>
+      <div class="ty__ctas">
+        <a class="btn" href="/projects/">Explore projects <Arrow /></a>
+        <a class="btn btn--ghost" href="/">Back to home <Arrow /></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = new URLSearchParams(location.search).get('form');
+  const text = document.querySelector('[data-ty-text]');
+  if (form === 'school' && text) {
+    text.innerHTML = 'The school will contact you with course details, tuition and the next available group. If your question is urgent, call <a href="tel:+37498722727">+374 98 722727</a>.';
+  }
+</script>
+
+<style>
+  .ty { min-height: 82svh; display: grid; align-items: center; padding-top: calc(var(--header-h) + 48px); padding-bottom: 96px; }
+  .ty__inner { display: grid; gap: 1.75rem; justify-items: start; max-width: 1100px; }
+  .ty__mark { width: 64px; color: var(--wine); }
+  .ty h1 em { color: var(--wine); }
+  .ty .lead a { text-decoration: underline; text-underline-offset: 4px; }
+  .ty__ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+</style>

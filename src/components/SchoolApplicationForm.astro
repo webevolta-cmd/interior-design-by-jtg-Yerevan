@@ -1,0 +1,175 @@
+---
+import '../styles/forms.css';
+import Arrow from './Arrow.astro';
+import FormSuccess from './FormSuccess.astro';
+import { site } from '../data/site';
+import { courseOptions } from '../data/school';
+
+const formName = 'school-enquiry';
+---
+
+<div class="form-wrap" data-form-wrap>
+  <form
+    class="form"
+    name={formName}
+    method="POST"
+    action="/thank-you/?form=school"
+    data-netlify="true"
+    netlify-honeypot="company_website"
+    data-form
+    data-form-encoding="urlencoded"
+    novalidate
+  >
+    <input type="hidden" name="form-name" value={formName} />
+    <p class="hp" aria-hidden="true">
+      <label>Leave this field empty <input name="company_website" tabindex="-1" autocomplete="off" /></label>
+    </p>
+
+    <fieldset>
+      <legend class="form__legend"><span class="index-num">01</span> I would like to…</legend>
+      <div class="choices" role="group" aria-label="Type of enquiry">
+        {['Apply for the next group', 'Request tuition information', 'Request course details & schedule', 'Speak with the school'].map((v, i) => (
+          <label class="choice"><input type="checkbox" name="enquiry_type" value={v} checked={i === 1} /><span>{v}</span></label>
+        ))}
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="form__legend"><span class="index-num">02</span> About you</legend>
+      <div class="form__group">
+        <div class="field">
+          <label class="field__label" for="sa-name">Full name<span class="req" aria-hidden="true">*</span></label>
+          <input id="sa-name" name="name" type="text" autocomplete="name" required minlength="2" aria-describedby="sa-name-err" />
+          <p class="field__error" id="sa-name-err" data-error-for="name"></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="sa-phone">Phone<span class="req" aria-hidden="true">*</span></label>
+          <input id="sa-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+374 …" data-validate="phone" aria-describedby="sa-phone-err" />
+          <p class="field__error" id="sa-phone-err" data-error-for="phone"></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="sa-email">Email<span class="req" aria-hidden="true">*</span></label>
+          <input id="sa-email" name="email" type="email" autocomplete="email" required aria-describedby="sa-email-err" />
+          <p class="field__error" id="sa-email-err" data-error-for="email"></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="sa-city">City / country<span class="req" aria-hidden="true">*</span></label>
+          <input id="sa-city" name="city_country" type="text" autocomplete="address-level2" required placeholder="e.g. Yerevan, Armenia" aria-describedby="sa-city-err" />
+          <p class="field__error" id="sa-city-err" data-error-for="city_country"></p>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="form__legend"><span class="index-num">03</span> Your studies</legend>
+      <div class="form__group">
+        <div class="field span-2">
+          <label class="field__label" for="sa-course">Course of interest<span class="req" aria-hidden="true">*</span></label>
+          <select id="sa-course" name="course" required aria-describedby="sa-course-err">
+            <option value="">Select…</option>
+            {courseOptions.map((c) => <option>{c}</option>)}
+          </select>
+          <p class="field__error" id="sa-course-err" data-error-for="course"></p>
+        </div>
+
+        <div class="field span-2">
+          <span class="field__label" id="sa-level-label">Experience level<span class="req" aria-hidden="true">*</span></span>
+          <div class="choices" role="radiogroup" aria-labelledby="sa-level-label" aria-describedby="sa-level-err">
+            {['Complete beginner', 'Some experience / self-taught', 'Working in design, architecture or construction'].map((v) => (
+              <label class="choice"><input type="radio" name="experience" value={v} required /><span>{v}</span></label>
+            ))}
+          </div>
+          <p class="field__error" id="sa-level-err" data-error-for="experience"></p>
+        </div>
+        <div class="field span-2" data-show-when="experience=Working in design, architecture or construction">
+          <label class="field__label" for="sa-role">Current role / field</label>
+          <input id="sa-role" name="current_role" type="text" placeholder="e.g. architect, furniture maker, contractor" />
+        </div>
+
+        <div class="field">
+          <span class="field__label" id="sa-format-label">Preferred format</span>
+          <div class="choices" role="radiogroup" aria-labelledby="sa-format-label">
+            {['In person, Yerevan', 'Online', 'Either'].map((v, i) => (
+              <label class="choice"><input type="radio" name="format" value={v} checked={i === 0} /><span>{v}</span></label>
+            ))}
+          </div>
+        </div>
+        <div class="field">
+          <span class="field__label" id="sa-lang-label">Language of study</span>
+          <div class="choices" role="radiogroup" aria-labelledby="sa-lang-label">
+            {['Armenian', 'English', 'Either'].map((v, i) => (
+              <label class="choice"><input type="radio" name="language" value={v} checked={i === 0} /><span>{v}</span></label>
+            ))}
+          </div>
+        </div>
+        <div class="field span-2" data-show-when="format=Online">
+          <label class="field__label" for="sa-tz">Your time zone<span class="opt">helps schedule online lessons</span></label>
+          <input id="sa-tz" name="time_zone" type="text" placeholder="e.g. Paris (UTC+1)" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="sa-schedule">Preferred schedule</label>
+          <select id="sa-schedule" name="schedule">
+            <option value="">Select…</option>
+            <option>Weekday daytime</option>
+            <option>Weekday evenings</option>
+            <option>Weekends</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="sa-start">Preferred start</label>
+          <select id="sa-start" name="start_period">
+            <option value="">Select…</option>
+            <option>Next available group</option>
+            <option>Within 1–3 months</option>
+            <option>Later this year</option>
+            <option>Just exploring for now</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label class="field__label" for="sa-goal">Career goal</label>
+          <select id="sa-goal" name="career_goal">
+            <option value="">Select…</option>
+            <option>Become a professional interior designer</option>
+            <option>Add visualisation / software skills to my work</option>
+            <option>Design my own home</option>
+            <option>Change career</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label class="field__label" for="sa-message">Questions or message<span class="opt">optional</span></label>
+          <textarea id="sa-message" name="message" placeholder="Anything you would like to ask about the course, tuition, schedule or design tours…"></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label class="consent">
+        <input type="checkbox" name="consent" value="yes" required aria-describedby="sa-consent-err" />
+        <span>I agree that the school may contact me about this enquiry. My details are used only to reply.</span>
+      </label>
+      <p class="field__error" id="sa-consent-err" data-error-for="consent"></p>
+    </div>
+
+    <div class="form__alert" role="alert" tabindex="-1" data-form-alert>
+      <strong>Your enquiry could not be sent.</strong>
+      <span>Please try again — or call <a href={site.phoneHref}>{site.phone}</a> / email <a href={`mailto:${site.email}`}>{site.email}</a>.</span>
+    </div>
+
+    <div class="form__footer">
+      <p class="form__note">Tuition, upcoming start dates and group availability are shared personally — the school will reply with details for your chosen course.</p>
+      <button class="btn form__submit" type="submit" data-submit>
+        <span data-submit-label>Send enquiry</span>
+        <span class="spinner" aria-hidden="true"></span>
+        <Arrow />
+      </button>
+    </div>
+  </form>
+
+  <FormSuccess
+    title="Thank you — the school has your enquiry."
+    text="You will be contacted with course details, tuition and the next available group for your chosen format."
+  />
+</div>

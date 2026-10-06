@@ -1,0 +1,39 @@
+---
+interface Props { class?: string; compact?: boolean }
+const { class: className, compact = false } = Astro.props;
+---
+<a href="/" class:list={['brand', className, { 'brand--compact': compact }]}>
+  <span class="brand__mark" aria-hidden="true"><span>J</span><span>T</span><span class="brand__g">G</span></span>
+  <span class="brand__text">
+    <span class="brand__line">Interior Design</span>
+    <span class="brand__line brand__line--sub">Studio &amp; School · Yerevan</span>
+  </span>
+  <span class="visually-hidden">by JTG — home</span>
+</a>
+
+<style>
+  .brand { display: inline-flex; align-items: center; gap: 0.85rem; color: inherit; }
+  .brand__mark {
+    position: relative;
+    display: inline-grid;
+    grid-auto-flow: column;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    padding-inline: 8px;
+    transition: transform 0.8s var(--ease-expo);
+  }
+  .brand__g { color: var(--brand-g, var(--wine)); font-style: italic; }
+  .brand:hover .brand__mark { transform: rotate(-12deg); }
+  .brand__text { display: grid; line-height: 1.15; }
+  .brand__line { font-family: var(--font-serif); font-size: 1.05rem; letter-spacing: 0.01em; }
+  .brand__line--sub { font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.75; margin-top: 3px; }
+  @media (max-width: 420px) { .brand__line--sub { display: none; } }
+  .brand--compact .brand__text { display: none; }
+</style>

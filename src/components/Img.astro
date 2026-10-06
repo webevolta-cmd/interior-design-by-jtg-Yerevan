@@ -1,0 +1,51 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  sizes?: string;
+  /** Largest rendered CSS width class: picks a sensible set of candidate widths. */
+  size?: 'full' | 'large' | 'half' | 'third' | 'thumb';
+  priority?: boolean;
+  class?: string;
+  position?: string;
+}
+
+const { src, alt, sizes, size = 'large', priority = false, class: className, position } = Astro.props;
+
+const sets: Record<NonNullable<Props['size']>, number[]> = {
+  full: [640, 960, 1280, 1680, 2200, 2880],
+  large: [560, 840, 1200, 1600, 2200],
+  half: [480, 720, 960, 1280, 1600],
+  third: [400, 640, 900, 1200],
+  thumb: [320, 480, 720],
+};
+const defaultSizes: Record<NonNullable<Props['size']>, string> = {
+  full: '100vw',
+  large: '(min-width: 900px) 70vw, 100vw',
+  half: '(min-width: 900px) 50vw, 100vw',
+  third: '(min-width: 900px) 33vw, 100vw',
+  thumb: '(min-width: 900px) 20vw, 50vw',
+};
+
+const candidates = sets[size].filter((w) => w < src.width);
+const widths = [...candidates, Math.min(src.width, sets[size][sets[size].length - 1])];
+const unique = [...new Set(widths)].sort((a, b) => a - b);
+const style = position ? `object-position: ${position}` : undefined;
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  widths={unique}
+  sizes={sizes ?? defaultSizes[size]}
+  formats={['webp']}
+  quality={78}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding={priority ? 'sync' : 'async'}
+  fetchpriority={priority ? 'high' : 'auto'}
+  class={className}
+  style={style}
+/>

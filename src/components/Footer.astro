@@ -1,0 +1,136 @@
+---
+import Arrow from './Arrow.astro';
+import { nav, site } from '../data/site';
+interface Props { showCta?: boolean }
+const { showCta = true } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-night">
+  <div class="container">
+    {showCta && (<div class="footer-cta">
+      <a class="footer-cta__item" href="/interior-design/#request">
+        <span class="eyebrow">Interior design</span>
+        <span class="footer-cta__title">Start a <em>project</em></span>
+        <Arrow class="footer-cta__arrow" />
+      </a>
+      <a class="footer-cta__item" href="/design-school/#apply">
+        <span class="eyebrow">Design school</span>
+        <span class="footer-cta__title">Apply / request <em>information</em></span>
+        <Arrow class="footer-cta__arrow" />
+      </a>
+    </div>)}
+
+    <div class="footer-grid">
+      <div class="footer-col footer-col--wide">
+        <p class="footer-statement serif">Design must tell the story first. Real comfort — visual and physical — is vital to any place we touch.</p>
+      </div>
+
+      <div class="footer-col">
+        <h2 class="footer-h">Visit</h2>
+        <address>
+          {site.address.street}<br />
+          {site.address.district}, {site.address.city} {site.address.postalCode}<br />
+          {site.address.country}
+        </address>
+        <a class="footer-link" href={site.maps.google} target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+
+      <div class="footer-col">
+        <h2 class="footer-h">Contact</h2>
+        <a class="footer-link" href={site.phoneHref}>{site.phone}</a>
+        <a class="footer-link" href={`mailto:${site.email}`}>{site.email}</a>
+        <p class="muted footer-small">Studio &amp; school · Armenian / English</p>
+      </div>
+
+      <div class="footer-col">
+        <h2 class="footer-h">Follow</h2>
+        <a class="footer-link" href={site.social.studioInstagram.href} target="_blank" rel="noopener">Studio — Instagram</a>
+        <a class="footer-link" href={site.social.schoolInstagram.href} target="_blank" rel="noopener">School — Instagram</a>
+        <a class="footer-link" href={site.social.founderInstagram.href} target="_blank" rel="noopener">Jemma — Instagram</a>
+        <a class="footer-link" href={site.social.facebook.href} target="_blank" rel="noopener">Facebook</a>
+        <a class="footer-link" href={site.social.youtube.href} target="_blank" rel="noopener">YouTube</a>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2 class="footer-h">Explore</h2>
+        <a class="footer-link" href="/">Home</a>
+        {nav.map((item) => <a class="footer-link" href={item.href}>{item.label}</a>)}
+      </nav>
+    </div>
+
+    <div class="footer-mark" aria-hidden="true">
+      <span>Studio</span><span class="footer-mark__amp">&amp;</span><span>School</span><span class="footer-mark__by">by JTG</span>
+    </div>
+
+    <div class="footer-base">
+      <p>© {year} {site.name}. All rights reserved.</p>
+      <p>Visualisations and photographs © the studio and its students.</p>
+      <a href="#top" class="footer-top" data-scroll-top>Back to top <Arrow dir="up-right" /></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { padding-top: clamp(64px, 9vw, 140px); padding-bottom: 28px; overflow: hidden; }
+  .footer-cta { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line-night); border-bottom: 1px solid var(--line-night); }
+  .footer-cta__item {
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(32px, 4vw, 64px) clamp(0px, 2vw, 32px) clamp(32px, 4vw, 64px) 0;
+    transition: color 0.5s var(--ease-out);
+  }
+  .footer-cta__item + .footer-cta__item { border-left: 1px solid var(--line-night); padding-left: clamp(20px, 3vw, 48px); }
+  .footer-cta__title { font-family: var(--font-serif); font-size: clamp(2rem, 1.2rem + 3vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; }
+  .footer-cta__title em { color: #d9b38c; }
+  .footer-cta__item :global(.footer-cta__arrow) { width: 3rem; height: 1.5rem; transition: transform 0.7s var(--ease-expo); }
+  .footer-cta__item:hover :global(.footer-cta__arrow) { transform: translateX(14px); }
+  @media (max-width: 760px) {
+    .footer-cta { grid-template-columns: 1fr; }
+    .footer-cta__item + .footer-cta__item { border-left: 0; border-top: 1px solid var(--line-night); padding-left: 0; }
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: clamp(28px, 3vw, 48px);
+    padding-block: clamp(48px, 6vw, 96px);
+  }
+  .footer-statement { font-size: clamp(1.35rem, 1rem + 1vw, 2rem); line-height: 1.25; max-width: 22ch; font-style: italic; }
+  .footer-col { display: flex; flex-direction: column; gap: 0.45rem; font-size: var(--fs-sm); }
+  .footer-h { font-family: var(--font-sans); font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-night-muted); margin-bottom: 0.6rem; }
+  .footer-link { width: fit-content; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.6s var(--ease-expo); }
+  .footer-link:hover { background-size: 100% 1px; }
+  .footer-small { font-size: var(--fs-xs); margin-top: 0.4rem; }
+  @media (max-width: 1100px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } .footer-col--wide { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
+
+  .footer-mark {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.25em;
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 8.6vw, 10.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    color: var(--on-night);
+    opacity: 0.92;
+    padding-bottom: clamp(24px, 3vw, 40px);
+  }
+  .footer-mark__amp { font-style: italic; color: #d9b38c; }
+  .footer-mark__by { font-style: italic; font-size: 0.42em; letter-spacing: -0.01em; margin-left: 0.2em; color: var(--on-night-muted); }
+  .footer-base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-night);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.06em;
+    color: var(--on-night-muted);
+  }
+  .footer-top { display: inline-flex; align-items: center; gap: 0.5rem; text-transform: uppercase; letter-spacing: 0.16em; }
+</style>

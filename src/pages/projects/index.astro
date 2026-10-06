@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects, categories } from '../../data/projects';
+import { breadcrumbSchema } from '../../data/schema';
+import ogImg from '../../assets/projects/mediterranean-villa/pool.jpg';
+
+const counts = Object.fromEntries(categories.map((c) => [c, projects.filter((p) => p.category === c).length]));
+// Editorial rhythm: alternate wide and tall cards across a 12-column grid
+const layout = [
+  { col: '1 / span 7', ratio: '4 / 3', size: 'large' },
+  { col: '9 / span 4', ratio: '4 / 5', size: 'half', offset: '16%' },
+  { col: '2 / span 4', ratio: '4 / 5', size: 'half' },
+  { col: '7 / span 6', ratio: '3 / 2', size: 'large', offset: '10%' },
+  { col: '1 / span 5', ratio: '4 / 5', size: 'half' },
+  { col: '7 / span 5', ratio: '4 / 5', size: 'half', offset: '20%' },
+  { col: '1 / span 8', ratio: '16 / 10', size: 'large' },
+  { col: '10 / span 3', ratio: '3 / 4', size: 'third', offset: '30%' },
+] as const;
+const origin = Astro.site!;
+---
+
+<Base
+  title="Projects — Interior, Exterior & Landscape Portfolio"
+  description="Portfolio of Interior Design by JTG, Yerevan: neoclassical and contemporary apartments, kitchens, bathrooms, a pâtisserie, a learning centre, villas, pools and gardens — 2025–2026 projects with before & after."
+  ogImage={ogImg}
+  ogImageAlt="Mediterranean villa and pool designed by Interior Design by JTG"
+  schema={breadcrumbSchema(origin, [{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects/' }])}
+>
+  <section class="pj-hero">
+    <div class="container">
+      <nav class="crumbs crumbs--ink" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Projects</span></nav>
+      <div class="pj-hero__grid">
+        <h1 class="display" data-reveal="lines">
+          <span class="line-mask" style="--i:0"><span>Selected</span></span>
+          <span class="line-mask" style="--i:1"><span><em>projects</em></span></span>
+        </h1>
+        <div class="pj-hero__aside" data-reveal style="--delay:0.3s">
+          <p class="lead">Homes, commercial interiors, villas and gardens published by the studio between November 2025 and September 2026 — most recent first.</p>
+          <p class="muted pj-hero__note">Imagery: the studio’s photorealistic design visualisations and its photographs of existing spaces (“before”).</p>
+        </div>
+      </div>
+
+      <div class="filter" data-filter role="group" aria-label="Filter projects by category">
+        <button type="button" class="filter__btn" data-filter-value="all" aria-pressed="true">All <sup>{projects.length}</sup></button>
+        {categories.map((c) => (
+          <button type="button" class="filter__btn" data-filter-value={c} aria-pressed="false">{c} <sup>{counts[c]}</sup></button>
+        ))}
+        <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pj-list">
+    <div class="container">
+      <div class="pj-grid">
+        {projects.map((p, i) => {
+          const l = layout[i % layout.length];
+          return (
+            <div class="pj-cell" data-filter-item data-category={p.category} style={`--col:${l.col};--offset:${'offset' in l ? l.offset : '0'}`}>
+              <ProjectCard project={p} index={i + 1} size={l.size} ratio={l.ratio} headingLevel="h2" parallax />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .pj-hero { padding-top: calc(var(--header-h) + clamp(40px, 8vh, 96px)); padding-bottom: clamp(40px, 5vw, 72px); }
+  .pj-hero__grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem var(--gutter); align-items: end; margin-top: 1.5rem; }
+  .pj-hero__aside { display: grid; gap: 1rem; padding-bottom: 0.75rem; }
+  .pj-hero__note { font-size: var(--fs-sm); }
+  @media (max-width: 900px) { .pj-hero__grid { grid-template-columns: 1fr; } }
+
+  .filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: clamp(40px, 5vw, 72px); padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .filter__btn {
+    min-height: 44px;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid var(--line-strong);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s;
+  }
+  .filter__btn sup { font-size: 0.7em; margin-left: 0.2em; letter-spacing: 0.05em; }
+  .filter__btn:hover { border-color: var(--ink); }
+  .filter__btn[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  .pj-list { padding-top: clamp(24px, 3vw, 48px); padding-bottom: var(--section); }
+  .pj-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(56px, 7vw, 120px) var(--gutter); }
+  .pj-cell { grid-column: var(--col); margin-top: var(--offset); }
+  .pj-cell[hidden] { display: none; }
+  /* When filtered, fall back to a calm two-column grid */
+  .pj-grid:has(.pj-cell[hidden]) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pj-grid:has(.pj-cell[hidden]) .pj-cell { grid-column: auto; margin-top: 0; }
+  @media (max-width: 900px) {
+    .pj-grid { grid-template-columns: 1fr 1fr; }
+    .pj-cell { grid-column: auto; margin-top: 0; }
+    .pj-cell:nth-child(3n + 1) { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .pj-grid, .pj-grid:has(.pj-cell[hidden]) { grid-template-columns: 1fr; }
+    .pj-cell { grid-column: 1 / -1 !important; }
+  }
+
+</style>
